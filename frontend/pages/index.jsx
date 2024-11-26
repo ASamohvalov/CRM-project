@@ -1,6 +1,6 @@
-import {Aside} from "../components/aside.jsx";
-import { Footer } from "../components/footer.jsx";
-import { Header } from "../components/header";
+import {Aside} from "../../components/aside.jsx";
+import { Footer } from "../../components/footer.jsx";
+import { Header } from "../../components/header.jsx";
 
 function HomePage() {
 	return (
