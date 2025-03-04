@@ -7,8 +7,8 @@ export function Aside() {
 	return (
 		<aside
 			className="hidden lg:block pl-1 pt-[15vh] hover:pt-[calc(15vh-100px)] absolute top-0 h-[100%] w-14 bg-coffee dark:bg-cream hover:w-44 transition-all rounded-r-2xl overflow-hidden"
-			onMouseOver={() => setHidden(() => false)}
-			onMouseOut={() => setHidden(() => true)}
+			onMouseOver={() => setHidden(false)}
+			onMouseOut={() => setHidden(true)}
 		>
 			{hidden ? (
 				""
