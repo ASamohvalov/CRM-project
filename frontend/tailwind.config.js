@@ -11,7 +11,11 @@ module.exports = {
     extend: {
       colors: {
         "coffee": "#5E3023",
-        "cream": "#F3E9DC"
+        "milk": "#F3E9DC",
+        "waffle":"#C08552",
+        "chocolate":"#895737",
+        "dark-milk":"#A28772",
+        "dark-coffee":"#443020"
       },
       keyframes: {
         downToEnd: {
