@@ -19,6 +19,10 @@ public class Employee {
 
     @Column(unique = true)
     private String login;
+
+    @Column(unique = true)
+    private String email;
+
     private String password;
     private String firstName;
     private String lastName;
