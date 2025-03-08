@@ -17,7 +17,9 @@ public class JobTitle {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(unique = true)
     private String name;
+
     @Column(columnDefinition = "TEXT")
     private String description;
 }
