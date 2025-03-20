@@ -23,10 +23,11 @@ export function Aside() {
 				<HouseIco className="min-w-10 h-10 mr-5" />
 				<p className="text-white dark:text-coffee text-2xl">Домой</p>  
 			</div>
+			<Link>
 			<div className="flex relative items-center mt-5 mx-auto before:bg-white before:absolute before:bottom-0 before:left-0 hover:before:animate-downToEnd hover:before:h-[2px]">
 				<LoginIco className="min-w-10 h-10 mr-5" />
 				<p className="text-white dark:text-coffee text-2xl truncate">Логин</p>
-			</div>
+			</div></Link>
 		</aside>
 	);
 }
