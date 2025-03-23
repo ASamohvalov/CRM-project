@@ -15,7 +15,6 @@ public class AdminController {
 
     @PostMapping("/add_employee")
     public void addEmployee(@Valid @RequestBody AddEmployeeRequest request) {
-        System.out.println("hello");
         adminService.addEmployee(request);
     }
 

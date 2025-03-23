@@ -16,3 +16,11 @@ spring:
 server:
   servlet:
     context-path: /api
+
+token:
+  refresh:
+    expire-days: 30
+    encoded-secret-key: aDVCN1RNdWZOYVVmZ2dQckxweFVyRTR2UFpJVzhqa01jSnVtVGtIbFRNWUJJZTBXREZqajRvUHBrVEdsaFVSczRqVmhqQVRSZzRldnUzaHVyNWd3Q2dOTmJTQUtNYWlX
+  access:
+    expire-min: 15
+    encoded-secret-key: bkc3c0tlbjJXcDNYTlJ4ZmhDaE0zbmN2RHlPemw1Q0lndHo3VVV0c2Z2SkM5R2hpbXRBYTQ0Y0duRFlaMXJJMU9rTFdhbHlIN0dFRTdzNExXS2RsYVM4UDFob0YyU21J

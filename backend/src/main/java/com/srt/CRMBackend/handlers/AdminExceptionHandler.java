@@ -18,7 +18,6 @@ public class AdminExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> FieldAlreadyTakenExceptionHandler(
             ValidationException exception) {
-        System.out.println("not valid1");
         return exception.getErrors();
     }
 
@@ -26,7 +25,6 @@ public class AdminExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> MethodArgumentNotValidExceptionHandler(
             MethodArgumentNotValidException exception) {
-        System.out.println("not valid2");
         Map<String, String> errors = new HashMap<>();
         exception.getBindingResult().getAllErrors().forEach((error) -> {
             String fieldName = ((FieldError) error).getField();

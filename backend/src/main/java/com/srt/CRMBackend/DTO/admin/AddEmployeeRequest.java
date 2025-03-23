@@ -24,6 +24,8 @@ public class AddEmployeeRequest {
     private String firstName;
     @NotBlank
     private String lastName;
+    @NotBlank
+    private String patronymic;
 
     @NotNull
     private UUID jobTitle;

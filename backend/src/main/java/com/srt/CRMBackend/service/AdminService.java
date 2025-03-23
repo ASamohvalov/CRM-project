@@ -34,6 +34,7 @@ public class AdminService {
                 .email(request.getEmail())
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
+                .patronymic(request.getPatronymic())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .jobTitle(jobTitle)
                 .build();
