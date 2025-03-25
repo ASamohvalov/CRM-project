@@ -18,4 +18,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
     boolean existsByEmail(String email);
 
     Optional<Employee> findByLogin(String login);
+
+    @Query("SELECT e FROM Employee e LEFT JOIN FETCH e.roles er LEFT JOIN FETCH er.role LEFT JOIN FETCH e.jobTitle WHERE login = :login")
+    Employee getByLoginWithRolesAndJobTitle(String login);
 }
