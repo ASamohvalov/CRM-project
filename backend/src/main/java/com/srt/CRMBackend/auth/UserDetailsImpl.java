@@ -1,13 +1,11 @@
 package com.srt.CRMBackend.auth;
 
 import com.srt.CRMBackend.models.Employee;
-import com.srt.CRMBackend.models.EmployeeRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
@@ -15,9 +13,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return employee.getRoles().stream()
-                .map(EmployeeRole::getRole)
-                .collect(Collectors.toList());
+        return employee.getRoles();
     }
 
     @Override

@@ -18,6 +18,7 @@ public class Token {
     private UUID id;
 
     @ManyToOne
+    @JoinColumn(name = "employee_id")
     private Employee employee;
 
     @Column(columnDefinition = "TEXT")

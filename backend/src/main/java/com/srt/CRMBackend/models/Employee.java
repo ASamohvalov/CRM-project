@@ -30,9 +30,14 @@ public class Employee {
     private String patronymic;
 
     @ManyToOne
+    @JoinColumn(name = "job_title_id")
     private JobTitle jobTitle;
 
     @OneToMany
-    @JoinColumn(name = "employee_role_id")
-    private Set<EmployeeRole> roles = new HashSet<>();
+    @JoinTable(
+            name = "employee_roles",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 }

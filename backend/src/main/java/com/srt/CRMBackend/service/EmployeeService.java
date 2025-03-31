@@ -3,6 +3,7 @@ package com.srt.CRMBackend.service;
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
 import com.srt.CRMBackend.auth.UserDetailsImpl;
 import com.srt.CRMBackend.models.Employee;
+import com.srt.CRMBackend.models.Role;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,7 +19,8 @@ public class EmployeeService {
     public EmployeeDTO employeeData() {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
-        Employee employee = employeeRepository.getByLoginWithRolesAndJobTitle(userDetails.getUsername());
+        Employee employee = employeeRepository.findByLoginWithRolesAndJobTitle(userDetails.getUsername())
+                .orElseThrow();
         return EmployeeDTO.builder()
                 .login(employee.getLogin())
                 .email(employee.getEmail())
@@ -27,7 +29,7 @@ public class EmployeeService {
                 .jobTitleName(employee.getJobTitle().getName())
                 .rolesName(
                         employee.getRoles().stream()
-                                .map(e -> e.getRole().getName())
+                                .map(Role::getAuthority)
                                 .collect(Collectors.toSet())
                 )
                 .build();
