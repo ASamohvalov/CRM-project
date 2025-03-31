@@ -23,8 +23,7 @@ function HomePage() {
 			<Header title="Главная страница" />
 			<Aside />
 			<main className="lg:pl-20 px-6 pt-32">
-				<button className="bg-black w-[100%]">ekffieifj</button>
-				<p>{hz}</p>
+				
 			</main>
 			<Footer />
 		</>

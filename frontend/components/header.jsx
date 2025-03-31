@@ -25,13 +25,13 @@ export function Header({ title, user = "Филиппов Михаил" }) {
 
 	return (
 		<div className="fixed min-w-[100vw] pt-10">
-			<header className="relative flex flex-col w-[100vw] max-h-96 lg:w-[100vw]" onClick={burgerClickHandle}>
+			<header className="text-milk relative flex flex-col w-[100vw] max-h-96 lg:w-[100vw]" onClick={burgerClickHandle}>
 				<div
-					className="bg-coffee dark:bg-cream cursor-pointer items-center relative w-64 h-16 flex text-3xl text-cream dark:text-coffee rounded-3xl py-4 mx-auto mb-6 lg:hover:w-[80vw] hover:justify-normal transition-all lg:hover:pl-4 overflow-hidden"
+					className="bg-coffee dark:bg-cream header cursor-pointer items-center relative w-64 h-16 flex text-3xl text-cream dark:text-coffee rounded-3xl py-4 mx-auto mb-6 lg:hover:w-[80vw] hover:justify-normal transition-all lg:hover:pl-4 overflow-hidden"
 					onMouseOver={mousehandler}
 					onMouseOut={mousehandler}
 				>
-					<h1 className="pl-2 text-nowrap">{title}</h1>
+					<h1 className="pl-2 text-nowrap text-">{title}</h1>
 					<div
 						className="hidden lg:flex items-center text-[28px] ml-auto gap-4 pr-10"
 						id="ok"
