@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/admin")
 @RequiredArgsConstructor
@@ -14,12 +16,14 @@ public class AdminController {
     private final AdminService adminService;
 
     @PostMapping("/add_employee")
-    public void addEmployee(@Valid @RequestBody AddEmployeeRequest request) {
+    public Map<String, String> addEmployee(@Valid @RequestBody AddEmployeeRequest request) {
         adminService.addEmployee(request);
+        return Map.of("message", "работник успешно добавлен");
     }
 
     @PostMapping("/add_job_title")
-    public void addJobTitle(@Valid @RequestBody AddJobTitleRequest request) {
+    public Map<String, String> addJobTitle(@Valid @RequestBody AddJobTitleRequest request) {
         adminService.addJobTitle(request);
+        return Map.of("message", "должность успешно добавлена");
     }
 }
