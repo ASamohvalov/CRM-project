@@ -1,8 +1,10 @@
 package com.srt.CRMBackend.init;
 
 import com.srt.CRMBackend.models.Employee;
+import com.srt.CRMBackend.models.JobTitle;
 import com.srt.CRMBackend.models.Role;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
+import com.srt.CRMBackend.repositories.JobTitleRepository;
 import com.srt.CRMBackend.repositories.RoleRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +21,12 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     private final EmployeeRepository employeeRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JobTitleRepository jobTitleRepository;
 
     @Override
     public void run(String... args) throws Exception {
         initRoles();
+        initJobTitles();
         initDefaultAdmin();
     }
 
@@ -39,6 +43,18 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     }
 
     @Transactional
+    private void initJobTitles() {
+        if (jobTitleRepository.count() == 0) {
+            jobTitleRepository.save(
+                    JobTitle.builder()
+                            .name("admin")
+                            .description("admin")
+                            .build()
+            );
+        }
+    }
+
+    @Transactional
     private void initDefaultAdmin() {
         String login = "admin";
 
@@ -51,6 +67,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
                     .firstName("admin")
                     .lastName("admin")
                     .patronymic("admin")
+                    .jobTitle(jobTitleRepository.getByName("admin"))
                     .build();
 
             employeeRepository.save(admin);

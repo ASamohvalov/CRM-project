@@ -1,8 +1,9 @@
 package com.srt.CRMBackend.service.auth.impl;
 
-import com.srt.CRMBackend.DTO.auth.JwtRequest;
+import com.srt.CRMBackend.DTO.auth.JwtDTO;
 import com.srt.CRMBackend.DTO.auth.SignInRequest;
 import com.srt.CRMBackend.exceptions.AuthenticationFailedException;
+import com.srt.CRMBackend.exceptions.RefreshTokenValidationException;
 import com.srt.CRMBackend.models.Employee;
 import com.srt.CRMBackend.models.Token;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
@@ -27,7 +28,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
     @Override
-    public JwtRequest signIn(SignInRequest request) {
+    public JwtDTO signIn(SignInRequest request) {
         String errorMessage = "неправильный логин или пароль";
         Employee employee = employeeRepository.findByLogin(request.getLogin())
                 .orElseThrow(() -> new AuthenticationFailedException(errorMessage));
@@ -36,7 +37,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new AuthenticationFailedException(errorMessage);
         }
 
-        JwtRequest jwtDto = new JwtRequest(
+        JwtDTO jwtDto = new JwtDTO(
                 jwtService.generateAccessToken(employee),
                 jwtService.generateRefreshToken(employee)
         );
@@ -50,6 +51,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         authenticate(request);
 
         return jwtDto;
+    }
+
+    @Override
+    public JwtDTO updateTokens(String refreshToken) {
+        if (jwtService.validateRefreshToken(refreshToken)) {
+            throw new RefreshTokenValidationException("срок действия токена истек");
+        }
+
+        Token token = tokenRepository.findByToken(refreshToken)
+                .orElseThrow(() -> new RefreshTokenValidationException("неправильный токен"));
+
+        JwtDTO jwtDTO = new JwtDTO(
+                jwtService.generateAccessToken(token.getEmployee()),
+                jwtService.generateRefreshToken(token.getEmployee())
+        );
+
+        token.setToken(jwtDTO.getRefreshToken());
+        return jwtDTO;
     }
 
     private void authenticate(SignInRequest request) {

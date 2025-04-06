@@ -1,7 +1,7 @@
 package com.srt.CRMBackend.handlers;
 
 import com.srt.CRMBackend.exceptions.AuthenticationFailedException;
-import io.jsonwebtoken.ExpiredJwtException;
+import com.srt.CRMBackend.exceptions.RefreshTokenValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -16,6 +16,13 @@ public class AuthenticationExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> authenticationFailedExceptionHandler(
             AuthenticationFailedException exception) {
+        return Map.of("message", exception.getMessage());
+    }
+
+    @ExceptionHandler(RefreshTokenValidationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public Map<String, String> invalidRefreshTokenExceptionHandler(
+            RefreshTokenValidationException exception) {
         return Map.of("message", exception.getMessage());
     }
 }
