@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/admin")
@@ -25,5 +26,10 @@ public class AdminController {
     public Map<String, String> addJobTitle(@Valid @RequestBody AddJobTitleRequest request) {
         adminService.addJobTitle(request);
         return Map.of("message", "должность успешно добавлена");
+    }
+
+    @GetMapping("/get_all_job_titles")
+    public Map<UUID, String> getAllJobTitles() {
+        return adminService.getAllJobTitles();
     }
 }

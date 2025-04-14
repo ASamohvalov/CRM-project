@@ -15,6 +15,6 @@ public class EmployeeController {
 
     @GetMapping("/get_employee_data")
     public EmployeeDTO employeeData() {
-        return employeeService.employeeData();
+        return employeeService.getEmployeeData();
     }
 }
