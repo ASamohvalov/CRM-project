@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.models;
+package com.srt.CRMBackend.models.employees;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

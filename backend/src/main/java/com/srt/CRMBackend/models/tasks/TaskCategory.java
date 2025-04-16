@@ -1,18 +1,20 @@
-package com.srt.CRMBackend.models;
+package com.srt.CRMBackend.models.tasks;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Entity
-@Table(name = "job_titles")
-@Getter
-@Setter
+@Table(name = "task_categories")
+@Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class JobTitle {
+@AllArgsConstructor
+public class TaskCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -20,6 +22,5 @@ public class JobTitle {
     @Column(unique = true)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
     private String description;
 }

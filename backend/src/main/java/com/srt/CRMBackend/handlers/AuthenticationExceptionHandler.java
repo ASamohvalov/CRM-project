@@ -1,7 +1,7 @@
 package com.srt.CRMBackend.handlers;
 
-import com.srt.CRMBackend.exceptions.AuthenticationFailedException;
-import com.srt.CRMBackend.exceptions.RefreshTokenValidationException;
+import com.srt.CRMBackend.exceptions.auth.AuthenticationFailedException;
+import com.srt.CRMBackend.exceptions.auth.RefreshTokenValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;

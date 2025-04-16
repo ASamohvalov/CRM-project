@@ -1,7 +1,7 @@
 package com.srt.CRMBackend.service.auth;
 
 import com.srt.CRMBackend.auth.UserDetailsImpl;
-import com.srt.CRMBackend.models.Employee;
+import com.srt.CRMBackend.models.employees.Employee;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +16,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Employee employee = employeeRepository.findByLoginWithRolesAndJobTitle(username)
+        Employee employee = employeeRepository.findByLoginWithRoles(username)
                 .orElseThrow(() -> new UsernameNotFoundException("работник не найден"));
         return new UserDetailsImpl(employee);
     }

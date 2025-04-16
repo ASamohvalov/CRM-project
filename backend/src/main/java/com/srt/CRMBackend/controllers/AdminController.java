@@ -2,6 +2,7 @@ package com.srt.CRMBackend.controllers;
 
 import com.srt.CRMBackend.DTO.admin.AddEmployeeRequest;
 import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
+import com.srt.CRMBackend.DTO.admin.AddQualificationRequest;
 import com.srt.CRMBackend.service.AdminService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,12 @@ public class AdminController {
     public Map<String, String> addJobTitle(@Valid @RequestBody AddJobTitleRequest request) {
         adminService.addJobTitle(request);
         return Map.of("message", "должность успешно добавлена");
+    }
+
+    @PostMapping("/add_qualification")
+    public Map<String, String> addQualification(@Valid @RequestBody AddQualificationRequest request) {
+        adminService.addQualification(request);
+        return Map.of("message", "квалификация успешно добавлена");
     }
 
     @GetMapping("/get_all_job_titles")

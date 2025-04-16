@@ -1,8 +1,9 @@
 package com.srt.CRMBackend.init;
 
-import com.srt.CRMBackend.models.Employee;
-import com.srt.CRMBackend.models.JobTitle;
-import com.srt.CRMBackend.models.Role;
+import com.srt.CRMBackend.models.employees.Employee;
+import com.srt.CRMBackend.models.employees.FullName;
+import com.srt.CRMBackend.models.employees.JobTitle;
+import com.srt.CRMBackend.models.employees.Role;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
 import com.srt.CRMBackend.repositories.JobTitleRepository;
 import com.srt.CRMBackend.repositories.RoleRepository;
@@ -21,12 +22,12 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     private final EmployeeRepository employeeRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JobTitleRepository jobTitleRepository;
+//    private final JobTitleRepository jobTitleRepository;
 
     @Override
     public void run(String... args) throws Exception {
         initRoles();
-        initJobTitles();
+//        initJobTitles();
         initDefaultAdmin();
     }
 
@@ -42,17 +43,17 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         }
     }
 
-    @Transactional
-    private void initJobTitles() {
-        if (jobTitleRepository.count() == 0) {
-            jobTitleRepository.save(
-                    JobTitle.builder()
-                            .name("admin")
-                            .description("admin")
-                            .build()
-            );
-        }
-    }
+//    @Transactional
+//    private void initJobTitles() {
+//        if (jobTitleRepository.count() == 0) {
+//            jobTitleRepository.save(
+//                    JobTitle.builder()
+//                            .name("admin")
+//                            .description("admin")
+//                            .build()
+//            );
+//        }
+//    }
 
     @Transactional
     private void initDefaultAdmin() {
@@ -64,10 +65,11 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
                     .password(passwordEncoder.encode("admin"))
                     .email("admin@ad.min")
                     .roles(Set.of(roleRepository.getByName("ROLE_ADMIN")))
-                    .firstName("admin")
-                    .lastName("admin")
-                    .patronymic("admin")
-                    .jobTitle(jobTitleRepository.getByName("admin"))
+                    .fullName(FullName.builder()
+                            .firstName("admin")
+                            .lastName("admin")
+                            .patronymic("admin")
+                            .build())
                     .build();
 
             employeeRepository.save(admin);

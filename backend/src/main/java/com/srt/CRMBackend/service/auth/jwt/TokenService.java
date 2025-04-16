@@ -1,6 +1,6 @@
 package com.srt.CRMBackend.service.auth.jwt;
 
-import com.srt.CRMBackend.models.Employee;
+import com.srt.CRMBackend.models.employees.Employee;
 
 public interface TokenService {
     String generate(Employee employee);

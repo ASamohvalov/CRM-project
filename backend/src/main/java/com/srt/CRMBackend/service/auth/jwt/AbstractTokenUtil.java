@@ -1,6 +1,7 @@
 package com.srt.CRMBackend.service.auth.jwt;
 
-import com.srt.CRMBackend.models.Employee;
+import com.srt.CRMBackend.models.employees.Employee;
+import com.srt.CRMBackend.models.employees.FullName;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -15,11 +16,13 @@ import java.util.Map;
 public abstract class AbstractTokenUtil {
 
     protected String generateToken(Employee employee, Date exp, SecretKey secretKey) {
+        FullName fullName = employee.getFullName();
+
         Map<String, String> claims = Map.of(
                 "email", employee.getEmail(),
-                "firstName", employee.getFirstName(),
-                "lastName", employee.getLastName(),
-                "patronymic", employee.getPatronymic()
+                "firstName", fullName.getFirstName(),
+                "lastName", fullName.getLastName(),
+                "patronymic", fullName.getPatronymic()
         );
 
         return Jwts.builder()

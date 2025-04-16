@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.exceptions;
+package com.srt.CRMBackend.exceptions.auth;
 
 public class AuthenticationFailedException extends RuntimeException {
     public AuthenticationFailedException(String message) {

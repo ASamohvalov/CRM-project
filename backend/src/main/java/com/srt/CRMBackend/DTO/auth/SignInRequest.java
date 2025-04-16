@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 public class SignInRequest {
-    @NotBlank
+    @NotBlank(message = "поле не должно быть пустым")
     private String login;
-    @NotBlank
+    @NotBlank(message = "поле не должно быть пустым")
     private String password;
 }

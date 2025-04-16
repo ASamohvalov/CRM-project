@@ -2,11 +2,11 @@ package com.srt.CRMBackend.service.impl;
 
 import com.srt.CRMBackend.DTO.admin.AddEmployeeRequest;
 import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
-import com.srt.CRMBackend.exceptions.ValidationException;
-import com.srt.CRMBackend.models.Employee;
-import com.srt.CRMBackend.models.JobTitle;
-import com.srt.CRMBackend.repositories.EmployeeRepository;
-import com.srt.CRMBackend.repositories.JobTitleRepository;
+import com.srt.CRMBackend.DTO.admin.AddQualificationRequest;
+import com.srt.CRMBackend.exceptions.admin.ValidationException;
+import com.srt.CRMBackend.exceptions.admin.ValidationOneFieldException;
+import com.srt.CRMBackend.models.employees.*;
+import com.srt.CRMBackend.repositories.*;
 import com.srt.CRMBackend.service.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -21,28 +22,33 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
     private final EmployeeRepository employeeRepository;
-    private final JobTitleRepository jobTitleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoleRepository roleRepository;
+    private final QualificationRepository qualificationRepository;
+    private final JobTitleRepository jobTitleRepository;
 
     @Override
     public void addEmployee(AddEmployeeRequest request) {
         validateAddEmployee(request);
 
-        JobTitle jobTitle = jobTitleRepository.findById(request.getJobTitle())
+        Qualification qualification = qualificationRepository
+                .findById(request.getQualificationId())
                 .orElseThrow(() -> new ValidationException(
-                        Map.of("jobTitle", "передан некорректный идентификатор")
-                ));
+                        Map.of("qualification", "неверный идентификатор квалификации"))
+                );
+
+        FullName fullName = FullName.builder()
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .patronymic(request.getPatronymic()).build();
 
         Employee employee = Employee.builder()
                 .login(request.getLogin())
                 .email(request.getEmail())
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .patronymic(request.getPatronymic())
+                .fullName(fullName)
                 .password(passwordEncoder.encode(request.getPassword()))
-                .jobTitle(jobTitle)
-                // todo roles
-                .build();
+                .qualification(qualification)
+                .roles(Set.of(roleRepository.getByName("ROLE_EMPLOYEE"))).build();
 
         employeeRepository.save(employee);
     }
@@ -60,6 +66,17 @@ public class AdminServiceImpl implements AdminService {
                 .description(request.getDescription())
                 .build();
         jobTitleRepository.save(jobTitle);
+    }
+
+    @Override
+    public void addQualification(AddQualificationRequest request) {
+        JobTitle jobTitle = jobTitleRepository.findById(request.getJobTitleId())
+                .orElseThrow(() -> new ValidationOneFieldException("передан неверный идентификатор"));
+
+        Qualification qualification = Qualification.builder()
+                .name(request.getQualificationName())
+                .jobTitle(jobTitle).build();
+        qualificationRepository.save(qualification);
     }
 
     @Override

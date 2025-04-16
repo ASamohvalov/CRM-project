@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.exceptions;
+package com.srt.CRMBackend.exceptions.admin;
 
 import lombok.Getter;
 import lombok.Setter;

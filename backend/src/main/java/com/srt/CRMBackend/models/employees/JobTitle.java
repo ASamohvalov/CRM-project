@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.models;
+package com.srt.CRMBackend.models.employees;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -6,21 +6,20 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tokens")
+@Table(name = "job_titles")
+@Getter
+@Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@Setter
-@Getter
-public class Token {
+public class JobTitle {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @Column(unique = true)
+    private String name;
 
     @Column(columnDefinition = "TEXT")
-    private String token;
+    private String description;
 }

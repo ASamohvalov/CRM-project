@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.models;
+package com.srt.CRMBackend.models.employees;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,13 +25,18 @@ public class Employee {
     private String email;
 
     private String password;
-    private String firstName;
-    private String lastName;
-    private String patronymic;
 
-    @ManyToOne
-    @JoinColumn(name = "job_title_id")
-    private JobTitle jobTitle;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "full_name_id")
+    private FullName fullName;
+
+    @OneToOne
+    @JoinTable(
+            name = "employee_qualification",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "qualification_id")
+    )
+    private Qualification qualification;
 
     @OneToMany
     @JoinTable(

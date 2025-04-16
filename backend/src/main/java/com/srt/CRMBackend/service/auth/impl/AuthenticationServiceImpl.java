@@ -2,10 +2,10 @@ package com.srt.CRMBackend.service.auth.impl;
 
 import com.srt.CRMBackend.DTO.auth.JwtDTO;
 import com.srt.CRMBackend.DTO.auth.SignInRequest;
-import com.srt.CRMBackend.exceptions.AuthenticationFailedException;
-import com.srt.CRMBackend.exceptions.RefreshTokenValidationException;
-import com.srt.CRMBackend.models.Employee;
-import com.srt.CRMBackend.models.Token;
+import com.srt.CRMBackend.exceptions.auth.AuthenticationFailedException;
+import com.srt.CRMBackend.exceptions.auth.RefreshTokenValidationException;
+import com.srt.CRMBackend.models.employees.Employee;
+import com.srt.CRMBackend.models.employees.Token;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
 import com.srt.CRMBackend.repositories.TokenRepository;
 import com.srt.CRMBackend.service.auth.AuthenticationService;

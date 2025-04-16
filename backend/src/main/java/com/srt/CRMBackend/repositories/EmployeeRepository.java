@@ -1,6 +1,6 @@
 package com.srt.CRMBackend.repositories;
 
-import com.srt.CRMBackend.models.Employee;
+import com.srt.CRMBackend.models.employees.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,6 +16,15 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
 
     Optional<Employee> findByLogin(String login);
 
-    @Query("SELECT e FROM Employee e LEFT JOIN FETCH e.roles er LEFT JOIN FETCH e.jobTitle WHERE login = :login")
-    Optional<Employee> findByLoginWithRolesAndJobTitle(String login);
+    @Query("""
+        SELECT e FROM Employee e
+        JOIN FETCH e.roles
+        LEFT JOIN FETCH e.qualification eq
+        LEFT JOIN FETCH eq.jobTitle
+        WHERE login = :login
+        """)
+    Optional<Employee> findByLoginWithRolesAndQualificationAndJobTitle(String login);
+
+    @Query("SELECT e FROM Employee e JOIN FETCH e.roles WHERE login = :login")
+    Optional<Employee> findByLoginWithRoles(String login);
 }
