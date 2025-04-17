@@ -2,10 +2,8 @@ package com.srt.CRMBackend.init;
 
 import com.srt.CRMBackend.models.employees.Employee;
 import com.srt.CRMBackend.models.employees.FullName;
-import com.srt.CRMBackend.models.employees.JobTitle;
 import com.srt.CRMBackend.models.employees.Role;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
-import com.srt.CRMBackend.repositories.JobTitleRepository;
 import com.srt.CRMBackend.repositories.RoleRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,16 +20,14 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     private final EmployeeRepository employeeRepository;
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
-//    private final JobTitleRepository jobTitleRepository;
+    private final DefaultAdminInitialization defaultAdminInitialization;
 
     @Override
     public void run(String... args) throws Exception {
         initRoles();
-//        initJobTitles();
-        initDefaultAdmin();
+        defaultAdminInitialization.init();
     }
 
-    @Transactional
     private void initRoles() {
         if (roleRepository.count() == 0) {
             List<Role> roles = List.of(
@@ -40,39 +36,6 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
                     Role.builder().name("ROLE_EMPLOYEE").build()
             );
             roleRepository.saveAll(roles);
-        }
-    }
-
-//    @Transactional
-//    private void initJobTitles() {
-//        if (jobTitleRepository.count() == 0) {
-//            jobTitleRepository.save(
-//                    JobTitle.builder()
-//                            .name("admin")
-//                            .description("admin")
-//                            .build()
-//            );
-//        }
-//    }
-
-    @Transactional
-    private void initDefaultAdmin() {
-        String login = "admin";
-
-        if (!employeeRepository.existsByLogin(login)) {
-            Employee admin = Employee.builder()
-                    .login(login)
-                    .password(passwordEncoder.encode("admin"))
-                    .email("admin@ad.min")
-                    .roles(Set.of(roleRepository.getByName("ROLE_ADMIN")))
-                    .fullName(FullName.builder()
-                            .firstName("admin")
-                            .lastName("admin")
-                            .patronymic("admin")
-                            .build())
-                    .build();
-
-            employeeRepository.save(admin);
         }
     }
 }
