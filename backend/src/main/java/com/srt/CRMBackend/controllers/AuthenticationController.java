@@ -6,7 +6,10 @@ import com.srt.CRMBackend.service.auth.AuthenticationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -21,7 +24,15 @@ public class AuthenticationController {
     }
 
     @PostMapping("/update_tokens")
-    public JwtDTO updateTokens(@RequestParam String refreshToken) {
-        return authenticationService.updateTokens(refreshToken);
+    public ResponseEntity<?> updateTokens(@RequestBody Map<String, String> request) {
+        if (request.get("refreshToken") == null) {
+            return ResponseEntity.badRequest().body(
+            """
+            {
+                "refreshToken": "поле обязательно"
+            }
+            """);
+        }
+        return ResponseEntity.ok(authenticationService.updateTokens(request.get("refreshToken")));
     }
 }

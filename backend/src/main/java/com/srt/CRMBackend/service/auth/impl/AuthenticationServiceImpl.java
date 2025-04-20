@@ -55,7 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public JwtDTO updateTokens(String refreshToken) {
-        if (jwtService.validateRefreshToken(refreshToken)) {
+        if (!jwtService.validateRefreshToken(refreshToken)) {
             throw new RefreshTokenValidationException("срок действия токена истек");
         }
 
