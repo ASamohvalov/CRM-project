@@ -1,5 +1,7 @@
 package com.srt.CRMBackend.mockmvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.srt.CRMBackend.DTO.auth.SignInRequest;
 import com.srt.CRMBackend.mockmvc.utils.DefaultAdminAuthentication;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +23,8 @@ class AuthenticationControllerTest {
     private WebApplicationContext webApplicationContext;
     @Autowired
     private DefaultAdminAuthentication defaultAdminAuthentication;
+    @Autowired
+    private ObjectMapper objectMapper;
 
     private MockMvc mockMvc;
 
@@ -31,20 +35,24 @@ class AuthenticationControllerTest {
 
     @Test
     void signInTest() throws Exception {
-        defaultAdminAuthentication.authenticate();
+        SignInRequest request = SignInRequest.builder()
+                .login(defaultAdminAuthentication.getLogin())
+                .password(defaultAdminAuthentication.getPassword())
+                .build();
+
+        mockMvc.perform(post("/auth/sign_in")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk());
     }
 
     @Test
     void updateTokensTest() throws Exception {
-        String refreshTokenJson = String.format("""
-                {
-                    "refreshToken": "%s"
-                }
-                """, defaultAdminAuthentication.getRefreshToken());
-
+        String refreshTokenJson = String.format("{\"refreshToken\": \"%s\"}",
+                defaultAdminAuthentication.getRefreshToken(mockMvc));
         System.out.println(refreshTokenJson);
 
-        mockMvc.perform(post("/auth/update_tokens")
+                mockMvc.perform(post("/auth/update_tokens")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(refreshTokenJson))
                 .andExpect(status().isOk());

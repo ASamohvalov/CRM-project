@@ -32,7 +32,7 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         if (roleRepository.count() == 0) {
             List<Role> roles = List.of(
                     Role.builder().name("ROLE_ADMIN").build(),
-                    Role.builder().name("ROLE_CURATOR").build(),
+                    Role.builder().name("ROLE_MANAGER").build(),
                     Role.builder().name("ROLE_EMPLOYEE").build()
             );
             roleRepository.saveAll(roles);

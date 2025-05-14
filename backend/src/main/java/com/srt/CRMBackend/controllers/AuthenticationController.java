@@ -2,7 +2,7 @@ package com.srt.CRMBackend.controllers;
 
 import com.srt.CRMBackend.DTO.auth.JwtDTO;
 import com.srt.CRMBackend.DTO.auth.SignInRequest;
-import com.srt.CRMBackend.service.auth.AuthenticationService;
+import com.srt.CRMBackend.services.auth.AuthenticationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,11 +27,8 @@ public class AuthenticationController {
     public ResponseEntity<?> updateTokens(@RequestBody Map<String, String> request) {
         if (request.get("refreshToken") == null) {
             return ResponseEntity.badRequest().body(
-            """
-            {
-                "refreshToken": "поле обязательно"
-            }
-            """);
+                   Map.of("refreshToken", "поле обязательно к заполнению")
+            );
         }
         return ResponseEntity.ok(authenticationService.updateTokens(request.get("refreshToken")));
     }

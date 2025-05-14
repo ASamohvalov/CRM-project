@@ -1,6 +1,6 @@
 package com.srt.CRMBackend.auth;
 
-import com.srt.CRMBackend.service.auth.jwt.TokenService;
+import com.srt.CRMBackend.services.auth.jwt.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

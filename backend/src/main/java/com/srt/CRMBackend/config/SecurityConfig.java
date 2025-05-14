@@ -33,6 +33,7 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/task/**").hasAnyRole(new String[] {"ADMIN", "MANAGER"})
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(manager -> manager

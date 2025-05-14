@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.service.auth.impl;
+package com.srt.CRMBackend.services.auth.impl;
 
 import com.srt.CRMBackend.DTO.auth.JwtDTO;
 import com.srt.CRMBackend.DTO.auth.SignInRequest;
@@ -8,8 +8,9 @@ import com.srt.CRMBackend.models.employees.Employee;
 import com.srt.CRMBackend.models.employees.Token;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
 import com.srt.CRMBackend.repositories.TokenRepository;
-import com.srt.CRMBackend.service.auth.AuthenticationService;
-import com.srt.CRMBackend.service.auth.jwt.JwtService;
+import com.srt.CRMBackend.services.auth.AuthenticationService;
+import com.srt.CRMBackend.services.auth.jwt.JwtService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,6 +55,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
+    @Transactional
     public JwtDTO updateTokens(String refreshToken) {
         if (!jwtService.validateRefreshToken(refreshToken)) {
             throw new RefreshTokenValidationException("срок действия токена истек");

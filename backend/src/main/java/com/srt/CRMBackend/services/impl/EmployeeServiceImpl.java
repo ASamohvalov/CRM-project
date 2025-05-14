@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.service.impl;
+package com.srt.CRMBackend.services.impl;
 
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
 import com.srt.CRMBackend.auth.UserDetailsImpl;
@@ -7,7 +7,7 @@ import com.srt.CRMBackend.models.employees.JobTitle;
 import com.srt.CRMBackend.models.employees.Qualification;
 import com.srt.CRMBackend.models.employees.Role;
 import com.srt.CRMBackend.repositories.EmployeeRepository;
-import com.srt.CRMBackend.service.EmployeeService;
+import com.srt.CRMBackend.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

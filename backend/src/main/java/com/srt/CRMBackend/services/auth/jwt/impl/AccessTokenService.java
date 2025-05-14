@@ -1,8 +1,8 @@
-package com.srt.CRMBackend.service.auth.jwt.impl;
+package com.srt.CRMBackend.services.auth.jwt.impl;
 
 import com.srt.CRMBackend.models.employees.Employee;
-import com.srt.CRMBackend.service.auth.jwt.AbstractTokenUtil;
-import com.srt.CRMBackend.service.auth.jwt.TokenService;
+import com.srt.CRMBackend.services.auth.jwt.AbstractTokenUtil;
+import com.srt.CRMBackend.services.auth.jwt.TokenService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

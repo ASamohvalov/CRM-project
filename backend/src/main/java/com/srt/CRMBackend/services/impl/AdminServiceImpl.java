@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.service.impl;
+package com.srt.CRMBackend.services.impl;
 
 import com.srt.CRMBackend.DTO.admin.AddEmployeeRequest;
 import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
@@ -7,7 +7,7 @@ import com.srt.CRMBackend.exceptions.admin.ValidationException;
 import com.srt.CRMBackend.exceptions.admin.ValidationOneFieldException;
 import com.srt.CRMBackend.models.employees.*;
 import com.srt.CRMBackend.repositories.*;
-import com.srt.CRMBackend.service.AdminService;
+import com.srt.CRMBackend.services.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

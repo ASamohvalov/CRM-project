@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.service.auth.jwt;
+package com.srt.CRMBackend.services.auth.jwt;
 
 import com.srt.CRMBackend.models.employees.Employee;
 import com.srt.CRMBackend.models.employees.FullName;

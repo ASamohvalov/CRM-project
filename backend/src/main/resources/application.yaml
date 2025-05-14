@@ -28,5 +28,5 @@ token:
 # admin default init
 admin:
   login: admin
-  email: admin
+  email: admin@ad.min
   password: admin

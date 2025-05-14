@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.service.auth;
+package com.srt.CRMBackend.services.auth;
 
 import com.srt.CRMBackend.DTO.auth.JwtDTO;
 import com.srt.CRMBackend.DTO.auth.SignInRequest;

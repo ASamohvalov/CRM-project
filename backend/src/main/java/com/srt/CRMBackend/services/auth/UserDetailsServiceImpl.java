@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.service.auth;
+package com.srt.CRMBackend.services.auth;
 
 import com.srt.CRMBackend.auth.UserDetailsImpl;
 import com.srt.CRMBackend.models.employees.Employee;
