@@ -31,8 +31,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/swagger-ui/**").permitAll()
-                        .requestMatchers("/auth/sign_in").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/task/**").hasAnyRole(new String[] {"ADMIN", "MANAGER"})
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(manager -> manager

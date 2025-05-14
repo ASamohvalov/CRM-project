@@ -1,6 +1,6 @@
 package com.srt.CRMBackend.repositories;
 
-import com.srt.CRMBackend.models.JobTitle;
+import com.srt.CRMBackend.models.employees.JobTitle;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

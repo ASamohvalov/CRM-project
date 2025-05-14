@@ -1,7 +1,7 @@
 package com.srt.CRMBackend.controllers;
 
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
-import com.srt.CRMBackend.service.EmployeeService;
+import com.srt.CRMBackend.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
