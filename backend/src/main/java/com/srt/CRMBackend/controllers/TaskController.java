@@ -5,12 +5,11 @@ import com.srt.CRMBackend.services.TaskService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/task")
@@ -19,9 +18,14 @@ import java.util.Map;
 public class TaskController {
     private final TaskService taskService;
 
-    @PostMapping("/add")
-    public Map<String, String> addTask(@Valid @RequestBody AddTaskRequest request) {
-        taskService.addTask(request);
-        return Map.of("message", "задача успешно добавлена");
+//    @PostMapping("/add")
+//    public ResponseEntity<> addTask(@Valid @RequestBody AddTaskRequest request) {
+//        taskService.addTask(request);
+//        return ResponseEntity.created(
+//    }
+
+    @DeleteMapping("/delete/{taskId}")
+    public void deleteTask(@PathVariable UUID taskId) {
+
     }
 }

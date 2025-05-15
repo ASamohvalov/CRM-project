@@ -3,11 +3,13 @@ package com.srt.CRMBackend.controllers;
 import com.srt.CRMBackend.DTO.admin.AddEmployeeRequest;
 import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
 import com.srt.CRMBackend.DTO.admin.AddQualificationRequest;
+import com.srt.CRMBackend.DTO.employee.JobTitleDto;
 import com.srt.CRMBackend.services.AdminService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -36,7 +38,7 @@ public class AdminController {
     }
 
     @GetMapping("/get_all_job_titles")
-    public Map<UUID, String> getAllJobTitles() {
+    public List<JobTitleDto> getAllJobTitles() {
         return adminService.getAllJobTitles();
     }
 }

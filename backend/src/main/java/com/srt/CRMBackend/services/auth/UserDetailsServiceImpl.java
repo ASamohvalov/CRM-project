@@ -2,7 +2,7 @@ package com.srt.CRMBackend.services.auth;
 
 import com.srt.CRMBackend.auth.UserDetailsImpl;
 import com.srt.CRMBackend.models.employees.Employee;
-import com.srt.CRMBackend.repositories.EmployeeRepository;
+import com.srt.CRMBackend.repositories.employee.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

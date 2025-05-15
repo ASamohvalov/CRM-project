@@ -6,7 +6,7 @@ import com.srt.CRMBackend.models.employees.Employee;
 import com.srt.CRMBackend.models.employees.JobTitle;
 import com.srt.CRMBackend.models.employees.Qualification;
 import com.srt.CRMBackend.models.employees.Role;
-import com.srt.CRMBackend.repositories.EmployeeRepository;
+import com.srt.CRMBackend.repositories.employee.EmployeeRepository;
 import com.srt.CRMBackend.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

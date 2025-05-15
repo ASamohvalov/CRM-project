@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.repositories;
+package com.srt.CRMBackend.repositories.tasks;
 
 import com.srt.CRMBackend.models.tasks.Task;
 import org.springframework.data.jpa.repository.JpaRepository;
