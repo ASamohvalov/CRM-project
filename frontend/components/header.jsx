@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Theme } from "./theme-switch";
+import { Theme } from "./";
 
 function mousehandler(e) {
 	if (e.type == "mouseover")
@@ -7,10 +7,10 @@ function mousehandler(e) {
 			.querySelectorAll("#ok")
 			.forEach((el) => (el.style.display = "flex"));
 	else
-		document.querySelectorAll("#ok").forEach((el) => (el.style.display = ""));
+		document.querySelectorAll("#ok").forEach((el) => (el.style.display = "none"));
 }
 
-export function Header({ title, user = "Филиппов Михаил" }) {
+export function Header({ title, userData }) {
 	const [isClicked, setClicked] = useState(false);
 	
 	function burgerClickHandle() {
@@ -31,12 +31,12 @@ export function Header({ title, user = "Филиппов Михаил" }) {
 					onMouseOver={mousehandler}
 					onMouseOut={mousehandler}
 				>
-					<h1 className="pl-2 text-nowrap text-">{title}</h1>
+					<h1 className="pl-2 text-nowrap text-center mr-40">{title}</h1>
 					<div
 						className="hidden lg:flex items-center text-[28px] ml-auto gap-4 pr-10"
 						id="ok"
 					>
-						<h1 className="pl-2 text-nowrap">{user}</h1>
+						<h1 className="pl-2 text-nowrap">{userData?.lastName} {userData?.firstName} {userData?.patronymic}</h1>
 						<Theme/>
 						<h2 className="">Фильтры</h2>
 					</div>

@@ -1,6 +1,10 @@
-export function UiInput({className, variant="milk", placeholder, children}) {
+//import { useState } from "react";
+//! Добавить функцию просмотра пароля
+export function UiInput({className, value, onChange, variant="milk", placeholder, type="text", children}) {
+	//const visible = useState(false)
+	
 	return (
-		<input type="text" className={`bg-milk text-waffle mb-16 outline-0 rounded-lg h-10 text-lg px-4 ${className} bg-${variant}`} placeholder={placeholder} >
+		<input type={type} value={value} onChange={onChange} className={`bg-milk text-waffle mb-16 outline-0 rounded-lg h-10 text-lg px-4 ${className} bg-${variant}`} placeholder={placeholder} >
 			{children}
 		</input>
 	);
