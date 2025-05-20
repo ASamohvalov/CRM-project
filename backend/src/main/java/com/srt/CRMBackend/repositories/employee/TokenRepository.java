@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.repositories;
+package com.srt.CRMBackend.repositories.employee;
 
 import com.srt.CRMBackend.models.employees.Token;
 import org.springframework.data.jpa.repository.JpaRepository;

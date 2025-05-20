@@ -2,8 +2,8 @@ package com.srt.CRMBackend.init;
 
 import com.srt.CRMBackend.models.employees.Employee;
 import com.srt.CRMBackend.models.employees.FullName;
-import com.srt.CRMBackend.repositories.EmployeeRepository;
-import com.srt.CRMBackend.repositories.RoleRepository;
+import com.srt.CRMBackend.repositories.employee.EmployeeRepository;
+import com.srt.CRMBackend.repositories.employee.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;

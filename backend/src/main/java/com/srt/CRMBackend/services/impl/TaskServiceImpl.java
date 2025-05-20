@@ -5,13 +5,14 @@ import com.srt.CRMBackend.exceptions.CrmBadRequestException;
 import com.srt.CRMBackend.models.tasks.Task;
 import com.srt.CRMBackend.models.tasks.TaskCategory;
 import com.srt.CRMBackend.models.tasks.TaskStatus;
-import com.srt.CRMBackend.repositories.TaskRepository;
+import com.srt.CRMBackend.repositories.tasks.TaskRepository;
 import com.srt.CRMBackend.repositories.tasks.TaskCategoryRepository;
 import com.srt.CRMBackend.services.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -38,5 +39,8 @@ public class TaskServiceImpl implements TaskService {
         taskRepository.save(task);
     }
 
-
+    @Override
+    public void deleteTask(UUID taskId) {
+        taskRepository.deleteById(taskId);
+    }
 }

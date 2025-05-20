@@ -1,18 +1,14 @@
 package com.srt.CRMBackend.init;
 
-import com.srt.CRMBackend.models.employees.Employee;
-import com.srt.CRMBackend.models.employees.FullName;
 import com.srt.CRMBackend.models.employees.Role;
-import com.srt.CRMBackend.repositories.EmployeeRepository;
-import com.srt.CRMBackend.repositories.RoleRepository;
-import jakarta.transaction.Transactional;
+import com.srt.CRMBackend.repositories.employee.EmployeeRepository;
+import com.srt.CRMBackend.repositories.employee.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
 
 @Component
 @RequiredArgsConstructor

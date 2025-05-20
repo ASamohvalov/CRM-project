@@ -2,8 +2,8 @@ package com.srt.CRMBackend.mockmvc.utils;
 
 import com.srt.CRMBackend.models.employees.JobTitle;
 import com.srt.CRMBackend.models.employees.Qualification;
-import com.srt.CRMBackend.repositories.JobTitleRepository;
-import com.srt.CRMBackend.repositories.QualificationRepository;
+import com.srt.CRMBackend.repositories.employee.JobTitleRepository;
+import com.srt.CRMBackend.repositories.employee.QualificationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
