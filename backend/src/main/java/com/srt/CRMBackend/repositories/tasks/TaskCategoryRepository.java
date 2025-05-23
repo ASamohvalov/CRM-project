@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface TaskCategoryRepository extends JpaRepository<TaskCategory, UUID> {
+    boolean existsByName(String name);
 }

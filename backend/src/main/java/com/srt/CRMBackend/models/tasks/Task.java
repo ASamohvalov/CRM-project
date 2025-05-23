@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -28,14 +30,8 @@ public class Task {
 
     private int numberOfPoints;
 
-    @Temporal(TemporalType.DATE)
-    private Date deadlineFrom;
-
-    @Temporal(TemporalType.DATE)
-    private Date deadlineTo;
-
-    @Temporal(TemporalType.DATE)
-    private Date publicationTime;
+    private LocalDate deadline;
+    private LocalDateTime publicationTime;
 
     @Enumerated(EnumType.STRING)
     private TaskStatus status;

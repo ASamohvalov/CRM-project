@@ -7,15 +7,13 @@ import com.srt.CRMBackend.DTO.employee.JobTitleDto;
 import com.srt.CRMBackend.exceptions.admin.ValidationException;
 import com.srt.CRMBackend.exceptions.admin.ValidationOneFieldException;
 import com.srt.CRMBackend.models.employees.*;
-import com.srt.CRMBackend.repositories.employee.EmployeeRepository;
-import com.srt.CRMBackend.repositories.employee.JobTitleRepository;
-import com.srt.CRMBackend.repositories.employee.QualificationRepository;
-import com.srt.CRMBackend.repositories.employee.RoleRepository;
+import com.srt.CRMBackend.repositories.employee.*;
 import com.srt.CRMBackend.services.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -26,6 +24,7 @@ public class AdminServiceImpl implements AdminService {
     private final RoleRepository roleRepository;
     private final QualificationRepository qualificationRepository;
     private final JobTitleRepository jobTitleRepository;
+    private final PersonalEmployeeDataRepository personalEmployeeDataRepository;
 
     @Override
     public void addEmployee(AddEmployeeRequest request) {
@@ -49,8 +48,14 @@ public class AdminServiceImpl implements AdminService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .qualification(qualification)
                 .roles(Set.of(roleRepository.getByName("ROLE_EMPLOYEE"))).build();
-
         employeeRepository.save(employee);
+
+        PersonalEmployeeData employeeData = PersonalEmployeeData.builder()
+                .employee(employee)
+                .passportNumber(request.getPassportNumber())
+                .passportSeries(request.getPassportSeries())
+                .dateOfEmployment(LocalDate.now()).build();
+        personalEmployeeDataRepository.save(employeeData);
     }
 
     @Override

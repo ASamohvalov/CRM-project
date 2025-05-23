@@ -1,7 +1,6 @@
 package com.srt.CRMBackend.handlers;
 
 import com.srt.CRMBackend.exceptions.CrmBadRequestException;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -12,7 +11,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class CrmExceptionHandler {
 
-    @ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler(CrmBadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Map<String, String> badRequestExceptionHandler(
             CrmBadRequestException exception) {

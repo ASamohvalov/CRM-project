@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
@@ -16,9 +16,7 @@ public class AddTaskRequest {
     @NotBlank
     private int numberOfPoints;
     @NotBlank
-    private Date deadlineFrom;
-    @NotBlank
-    private Date deadlineTo;
+    private LocalDate deadline;
     @NotNull
     private UUID taskCategoryId;
 }

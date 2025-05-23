@@ -29,4 +29,8 @@ public class AddEmployeeRequest {
 
     @NotNull
     private UUID qualificationId;
+
+    private String phoneNumber;
+    private int passportNumber;
+    private int passportSeries;
 }

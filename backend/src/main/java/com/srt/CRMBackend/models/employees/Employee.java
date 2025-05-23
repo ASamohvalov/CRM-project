@@ -30,12 +30,8 @@ public class Employee {
     @JoinColumn(name = "full_name_id")
     private FullName fullName;
 
-    @OneToOne
-    @JoinTable(
-            name = "employee_qualification",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "qualification_id")
-    )
+    @ManyToOne
+    @JoinColumn(name = "qualification_id")
     private Qualification qualification;
 
     @OneToMany
