@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface TaskRepository extends JpaRepository<Task, UUID> {
     @Query("""
         SELECT t FROM Task t
-        JOIN TaskCategory tc ON t.taskCategory.id = tc.id
+        JOIN FETCH TaskCategory tc ON t.taskCategory.id = tc.id
     """)
     List<Task> findAllWithCategory();
 }

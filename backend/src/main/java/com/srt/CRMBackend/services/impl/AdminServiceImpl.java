@@ -3,7 +3,6 @@ package com.srt.CRMBackend.services.impl;
 import com.srt.CRMBackend.DTO.admin.AddEmployeeRequest;
 import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
 import com.srt.CRMBackend.DTO.admin.AddQualificationRequest;
-import com.srt.CRMBackend.DTO.employee.JobTitleDto;
 import com.srt.CRMBackend.exceptions.admin.ValidationException;
 import com.srt.CRMBackend.exceptions.admin.ValidationOneFieldException;
 import com.srt.CRMBackend.models.employees.*;
@@ -14,7 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -84,15 +85,6 @@ public class AdminServiceImpl implements AdminService {
         qualificationRepository.save(qualification);
     }
 
-    @Override
-    public List<JobTitleDto> getAllJobTitles() {
-        return jobTitleRepository.findAll().stream()
-                .map((jt) -> JobTitleDto.builder()
-                        .id(jt.getId())
-                        .name(jt.getName())
-                        .description(jt.getDescription()).build())
-                .toList();
-    }
 
     private void validateAddEmployee(AddEmployeeRequest request) {
         Map<String, String> errors = new HashMap<>();
