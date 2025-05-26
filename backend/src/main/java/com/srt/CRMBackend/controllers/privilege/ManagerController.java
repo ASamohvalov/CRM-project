@@ -1,6 +1,7 @@
 package com.srt.CRMBackend.controllers.privilege;
 
 import com.srt.CRMBackend.DTO.admin.QualificationResponse;
+import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
 import com.srt.CRMBackend.DTO.employee.JobTitleDto;
 import com.srt.CRMBackend.services.ManagerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,8 +29,8 @@ public class ManagerController {
         return managerService.getAllQualifications();
     }
 
-//    @GetMapping("/get_all_employees")
-//    public List<EmployeeDTO> getAllEmployees() {
-//        return managerService.getAllEmployees();
-//    }
+    @GetMapping("/get_all_employees")
+    public List<EmployeeDTO> getAllEmployees() {
+        return managerService.getAllEmployees();
+    }
 }

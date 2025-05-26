@@ -1,13 +1,3 @@
---DROP TABLE IF EXISTS full_names CASCADE;
---DROP TABLE IF EXISTS job_titles CASCADE;
---DROP TABLE IF EXISTS qualifications CASCADE;
---DROP TABLE IF EXISTS roles CASCADE;
---DROP TABLE IF EXISTS employees CASCADE;
---DROP TABLE IF EXISTS employee_roles CASCADE;
---DROP TABLE IF EXISTS personal_employees_data CASCADE;
---DROP TABLE IF EXISTS points CASCADE;
---DROP TABLE IF EXISTS tokens CASCADE;
-
 -- Table: full_names
 CREATE TABLE full_names (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
