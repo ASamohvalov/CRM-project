@@ -1,3 +1,10 @@
+--DROP TABLE IF EXISTS task_categories CASCADE;
+--DROP TABLE IF EXISTS tasks CASCADE;
+--DROP TABLE IF EXISTS employee_tasks CASCADE;
+--DROP TABLE IF EXISTS qualification_level_for_task CASCADE;
+--DROP TABLE IF EXISTS requests CASCADE;
+--DROP TABLE IF EXISTS task_comments CASCADE;
+
 -- Таблица: task_categories
 CREATE TABLE task_categories (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
