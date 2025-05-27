@@ -1,6 +1,8 @@
+import clsx from "clsx";
+
 export function UiButton({className, onClick, color, children}) {
 	return (
-		<button className={`${className} bg-[${color}]`} onClick={onClick}>
+		<button className={clsx("bg-waffle",`${className} bg-[${color}]`)} onClick={onClick}>
 			{children}
 		</button>
 	);

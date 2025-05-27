@@ -5,7 +5,8 @@ import "../styles/styles.css";
 export default function Layout({ Component, pageProps }) {
   useEffect(() => {
     setInterval(async () => {
-      const req = await fetch("http://localhost:8080/api/auth/update_tokens", {
+      try{
+        const req = await fetch("http://localhost:8080/api/auth/update_tokens", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -20,8 +21,11 @@ export default function Layout({ Component, pageProps }) {
         localStorage.setItem("refreshToken", res.refreshToken);
         document.cookie = `accessToken = ${res.accessToken}`;
         console.log("success");
-      } else {
-        console.log("error");
+      }else{
+        throw new Error();
+      }
+      }catch(e){
+        console.log(e.message);
       }
     }, 60000);
   }, []);

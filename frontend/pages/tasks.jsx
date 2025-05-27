@@ -1,31 +1,15 @@
 import { useEffect, useState } from "react";
-import { Aside, Footer, Header, InfoBar, Task, Tasks } from "../components/";
+import { Aside, Footer, Header, Task, Tasks } from "../components/";
+import { getUserData } from "../logic";
+import { useRouter } from "next/router";
 
 function TaskListPage() {
   const [userData, setUserData] = useState({});
+  const router = useRouter();
 
   useEffect(() => {
     document.title = "Задачи";
-    async function getUserData() {
-      const accessToken = localStorage.getItem("accessToken");
-      const getData = await fetch(
-        "http://localhost:8080/api/employee/get_employee_data",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
-      );
-      if(getData.ok){
-        const DataJSON = await getData.json();
-        setUserData(DataJSON);
-      }else{
-        console.log((await getData).status);
-      }
-    }
-    getUserData();
+    getUserData({setUserData, router})
   }, []);
   return (
     <>
