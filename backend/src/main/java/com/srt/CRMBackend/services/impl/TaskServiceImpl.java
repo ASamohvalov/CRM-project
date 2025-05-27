@@ -1,8 +1,9 @@
 package com.srt.CRMBackend.services.impl;
 
 import com.srt.CRMBackend.DTO.task.TaskCategoryRequest;
-import com.srt.CRMBackend.DTO.task.AddTaskRequest;
-import com.srt.CRMBackend.DTO.task.TaskCategoryResponse;
+import com.srt.CRMBackend.DTO.task.TaskRequest;
+import com.srt.CRMBackend.DTO.task.TaskCategoryDTO;
+import com.srt.CRMBackend.DTO.task.TaskResponse;
 import com.srt.CRMBackend.exceptions.CrmBadRequestException;
 import com.srt.CRMBackend.models.tasks.Task;
 import com.srt.CRMBackend.models.tasks.TaskCategory;
@@ -24,7 +25,7 @@ public class TaskServiceImpl implements TaskService {
     private final TaskCategoryRepository taskCategoryRepository;
 
     @Override
-    public void addTask(AddTaskRequest request) {
+    public void addTask(TaskRequest request) {
         TaskCategory taskCategory = taskCategoryRepository
                 .findById(request.getTaskCategoryId())
                 .orElseThrow(() -> new CrmBadRequestException("некорректный идентификатор категории задачи"));
@@ -61,12 +62,29 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<TaskCategoryResponse> getAllTaskCategories() {
+    public List<TaskCategoryDTO> getAllTaskCategories() {
         return taskCategoryRepository.findAll().stream()
-                .map(c -> TaskCategoryResponse.builder()
+                .map(c -> TaskCategoryDTO.builder()
                         .id(c.getId())
                         .name(c.getName())
                         .description(c.getDescription()).build()
+                ).toList();
+    }
+
+    @Override
+    public List<TaskResponse> getAllTasks() {
+        return taskRepository.findAllWithCategory().stream()
+                .map(t -> TaskResponse.builder()
+                        .id(t.getId())
+                        .numberOfPoints(t.getNumberOfPoints())
+                        .name(t.getName())
+                        .deadline(t.getDeadline())
+                        .description(t.getDescription())
+                        .category(TaskCategoryDTO.builder()
+                                .id(t.getTaskCategory().getId())
+                                .name(t.getTaskCategory().getName())
+                                .description(t.getTaskCategory().getDescription()).build()
+                        ).build()
                 ).toList();
     }
 }

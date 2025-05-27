@@ -1,8 +1,9 @@
-package com.srt.CRMBackend.controllers;
+package com.srt.CRMBackend.controllers.privilege;
 
 import com.srt.CRMBackend.DTO.admin.AddEmployeeRequest;
 import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
 import com.srt.CRMBackend.DTO.admin.AddQualificationRequest;
+import com.srt.CRMBackend.DTO.admin.QualificationResponse;
 import com.srt.CRMBackend.DTO.employee.JobTitleDto;
 import com.srt.CRMBackend.services.AdminService;
 import jakarta.validation.Valid;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/admin")
@@ -31,14 +31,10 @@ public class AdminController {
         return Map.of("message", "должность успешно добавлена");
     }
 
+
     @PostMapping("/add_qualification")
     public Map<String, String> addQualification(@Valid @RequestBody AddQualificationRequest request) {
         adminService.addQualification(request);
         return Map.of("message", "квалификация успешно добавлена");
-    }
-
-    @GetMapping("/get_all_job_titles")
-    public List<JobTitleDto> getAllJobTitles() {
-        return adminService.getAllJobTitles();
     }
 }
