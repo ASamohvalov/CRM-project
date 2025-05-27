@@ -4,6 +4,7 @@ import com.srt.CRMBackend.DTO.task.TaskCategoryRequest;
 import com.srt.CRMBackend.DTO.task.TaskRequest;
 import com.srt.CRMBackend.DTO.task.TaskCategoryDTO;
 import com.srt.CRMBackend.DTO.task.TaskResponse;
+import com.srt.CRMBackend.auth.UserDetailsImpl;
 import com.srt.CRMBackend.exceptions.CrmBadRequestException;
 import com.srt.CRMBackend.models.tasks.Task;
 import com.srt.CRMBackend.models.tasks.TaskCategory;
@@ -12,6 +13,7 @@ import com.srt.CRMBackend.repositories.tasks.TaskRepository;
 import com.srt.CRMBackend.repositories.tasks.TaskCategoryRepository;
 import com.srt.CRMBackend.services.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,18 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = employeeRepository.findByLoginWithRolesAndQualificationAndJobTitle(userDetails.getUsername())
                 .orElseThrow();
 
-        Optional<Qualification> qualification = Optional.ofNullable(employee.getQualification());
+        return toEmployeeDTO(employee);
+    }
 
+    @Override
+    public List<EmployeeDTO> getAllEmployees() {
+        List<Employee> employees = employeeRepository.findAllWithRolesAndQualificationAndJobTitle();
+        return employees.stream().map(this::toEmployeeDTO)
+                .toList();
+    }
+
+    public EmployeeDTO toEmployeeDTO(Employee employee) {
+        Optional<Qualification> qualification = Optional.ofNullable(employee.getQualification());
         return EmployeeDTO.builder()
                 .login(employee.getLogin())
                 .email(employee.getEmail())
