@@ -27,7 +27,7 @@ export default function Layout({ Component, pageProps }) {
       }catch(e){
         console.log(e.message);
       }
-    }, 60000);
+    }, 600000);
   }, []);
 
   return (

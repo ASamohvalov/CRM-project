@@ -9,11 +9,11 @@ export function Modal({ handler, purpose, isShow }) {
       ) : purpose === "AddCategory" ? (
         <UIModal.AddTitle handler={handler}></UIModal.AddTitle>
       ) : purpose === "AddQualify" ? (
-        <UIModal.AddWork handler={handler}></UIModal.AddWork>
+        <UIModal.AddWork handler={handler}>Квалификация</UIModal.AddWork>
       ) : purpose === "AddTitle" ? (
-        <UIModal.AddWork handler={handler}></UIModal.AddWork>
-      ) : purpose === "GetTitle" ? (
-        <UIModal.GetTitle handler={handler}></UIModal.GetTitle>
+        <UIModal.AddWork handler={handler}>Должность</UIModal.AddWork>
+      ) : purpose === "GetWork" ? (
+        <UIModal.GetWork handler={handler}></UIModal.GetWork>
       ) : (
         <></>
       )}
