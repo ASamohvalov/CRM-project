@@ -16,7 +16,7 @@ function LoginPage() {
   async function formHandler(e) {
     e.preventDefault();
     try {      
-      const responce = await fetch(env.BACKEND_API_URL + "/api/auth/sign_in", {
+      const responce = await fetch(env.BACKEND_API_URL + "/auth/sign_in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -63,11 +63,14 @@ function LoginPage() {
             }
           ></UiInput>
           {errMessage ? (
-            <p className="text-red-400 text-center">Логин или пароль неверны</p>
+            <p className="text-red-400 text-center">Логин или пароль неверны <br/><span className="text-sm">(или наш сервер лег)</span></p>
           ) : (
             ""
           )}
           <UiButton
+          onClick={()=> console.log('efef')
+          }
+          type="submit"
             className={`${
               errMessage ? "mt-13" : "mt-16"
             } bg-waffle py-3 px-4 rounded-2xl text-3xl mx-auto w-[100%] max-w-64`}

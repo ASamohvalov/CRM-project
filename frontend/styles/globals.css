@@ -7,10 +7,14 @@
   --color-milk: #f3e9dc;
   --color-waffle: #c08552;
   --color-chocolate: #895737;
-  --color-dark-milk: #a28772;
-  --color-dark-coffee: #443020;
+
+  --color-dark-coffee: #F1D881;
+  --color-dark-milk: #443020;
+  --color-dark-waffle: #C08552;
+  --color-dark-chocolate: #5B5643;
 
   --animate-down-to-end: downToEnd 1s ease-in-out forwards;
+  --animate-loading: loadBoner 2s ease-out infinite;
 
   --font-Roboto: Roboto, sans;
 
@@ -22,7 +26,14 @@
       width: 80%;
     }
   }
-
+  @keyframes loadBoner {
+    0%{
+      transform:translate(-100%,0);
+    }
+    100%{
+      transform:translate(1300px,0);
+    }
+  }
 }
 
 @layer base {

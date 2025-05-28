@@ -5,4 +5,5 @@ export { InfoBar } from "./infoBar";
 export { Task } from "./task";
 export { Background } from "./background";
 export { Theme } from "./theme-switch";
+export { Loading } from "./loading";
 export { Footer } from "./footer";

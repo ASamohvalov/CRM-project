@@ -2,7 +2,7 @@ function Logout(){
     localStorage.clear();
 }
 
-async function getUserData({setUserData, router}) {
+async function getUserData({setUserData, router, setIsLoading}) {
       const accessToken = localStorage.getItem("accessToken");
       try{
         const getData = await fetch(
@@ -17,6 +17,7 @@ async function getUserData({setUserData, router}) {
       );
         const DataJSON = await getData.json();
         setUserData(DataJSON);
+        setIsLoading(false);
       }catch(e){
         router.push('/login');
       }}

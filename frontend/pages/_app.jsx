@@ -27,11 +27,11 @@ export default function Layout({ Component, pageProps }) {
       }catch(e){
         console.log(e.message);
       }
-    }, 600000);
+    }, 60000);
   }, []);
 
   return (
-    <div className={"text-slate-900 bg-[#F3E9DC] dark:bg-coffee min-h-[100vh]"}>
+    <div className={"text-slate-900 bg-[#F3E9DC] dark:bg-coffee min-h-[100vh] transition-colors"}>
       <Component {...pageProps} />
     </div>
   );

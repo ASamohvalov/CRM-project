@@ -9,7 +9,7 @@ export function Aside() {
     <aside
       className={`hidden lg:block pt-[15vh] absolute top-0 h-[100%] ${
         hidden ? "w-44" : "w-14"
-      } bg-coffee dark:bg-cream transition-all hover:w-44  rounded-r-2xl overflow-hidden`}
+      } bg-coffee dark:bg-dark-chocolate transition-all hover:w-44  rounded-r-2xl overflow-hidden`}
       onClick={() => setHidden((value) => !value)}
     >
       <Link
