@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { UiInput } from "../components/ui/uiInput";
 import { UiButton } from "../components/ui/uiButton";
 import { useRouter } from 'next/router';
+import * as env from "../env";
 
 function LoginPage() {
   const [formInput, setFormInput] = useState({ login: "", password: "" });
   const [errMessage, setErrMessage] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     document.title = "Авторизация";
@@ -14,8 +15,8 @@ function LoginPage() {
 
   async function formHandler(e) {
     e.preventDefault();
-    try {
-      const responce = await fetch("http://localhost:8080/api/auth/sign_in", {
+    try {      
+      const responce = await fetch(env.BACKEND_API_URL + "/api/auth/sign_in", {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
