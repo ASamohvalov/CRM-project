@@ -6,6 +6,7 @@ import * as env from "../env";
 
 function AdminPage() {
   const [userData, setUserData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const [isShow, setIsShow] = useState({
     status: false,
     purpose: "",
@@ -14,7 +15,7 @@ function AdminPage() {
   const router = useRouter();
   useEffect(() => {
     document.title = "Админ панель";
-    getUserData({ setUserData, router });
+    getUserData({ setUserData, setIsLoading, router });
   }, []);
   const buttons = [
     { purpose: "AddWorker", name: "Добавить сотрудника", handler: addQualifyHandler },
@@ -104,7 +105,7 @@ function AdminPage() {
 
   return (
     <>
-      <Header title="Админ панель" userData={userData} />
+      <Header title="Админ панель" userData={userData} isLoading={isLoading}/>
       <Aside />
       <main className="lg:pl-20 px-6 pt-32 h-[100vh]">
         <Background>
