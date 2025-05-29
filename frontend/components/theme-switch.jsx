@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 export function Theme({ className }) {
@@ -25,9 +26,7 @@ export function Theme({ className }) {
   return (
     <div
       className={
-        className
-          ? `bg-dark-coffee dark:bg-milk h-10 w-10 rounded-full ${className}`
-          : "dark:bg-dark-milk bg-dark-coffee h-10 w-10 rounded-full"
+        clsx("dark:bg-dark-milk bg-dark-chocolate h-10 w-10 rounded-full", className)
       }
       onClick={() => {
         lightDark();

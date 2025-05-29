@@ -2,7 +2,7 @@ import { Loading } from "./loading";
 
 export function Task({ header, children, points, isLoading }) {
   return (
-    <div className="bg-milk dark:bg-dark-milk text-waffle rounded-2xl pl-10 mb-2 flex h-[110px] box-border overflow-y-hidden">
+    <div className="bg-milk dark:bg-dark-coffee text-waffle dark:text-dark-milk rounded-2xl pl-10 mb-2 flex h-[110px] box-border overflow-y-hidden">
       <div className="pt-4">
         {isLoading ? (
           <Loading className={"h-7 w-36"} />

@@ -20,6 +20,8 @@ async function getUserData({setUserData, router, setIsLoading}) {
         const DataJSON = await getData.json();
         setUserData(DataJSON);
         setIsLoading(false);
+        console.log(DataJSON);
+        
       }catch(e){
         router.push('/login');
       }}

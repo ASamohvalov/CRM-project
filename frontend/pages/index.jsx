@@ -16,7 +16,7 @@ function HomePage() {
   return (
     <>
       <Header title="Главная страница" userData={userData} isLoading={isLoading}/>
-      <Aside />
+      <Aside userRole={userData.rolesName}/>
       <main className="lg:pl-20 px-6 pt-32 h-[100vh]">
         <InfoBar userData={userData} isLoading={isLoading}/>
         <Background>

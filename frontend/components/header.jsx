@@ -38,7 +38,7 @@ export function Header({ title, userData, isLoading }) {
         onClick={burgerClickHandle}
       >
         <div
-          className="bg-coffee dark:bg-dark-coffee header cursor-pointer items-center relative w-64 h-16 flex text-3xl justify-center text-cream rounded-3xl py-4 mx-auto mb-6 lg:hover:w-[80vw] hover:justify-normal transition-all lg:hover:pl-4 overflow-hidden"
+          className="bg-coffee dark:bg-dark-waffle header cursor-pointer items-center relative w-64 h-16 flex text-3xl justify-center text-cream rounded-3xl py-4 mx-auto mb-6 lg:hover:w-[80vw] hover:justify-normal transition-all lg:hover:pl-4 overflow-hidden"
           onMouseOver={mousehandler}
           onMouseOut={mousehandler}
         >

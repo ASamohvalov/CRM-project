@@ -106,16 +106,16 @@ function AdminPage() {
   return (
     <>
       <Header title="Админ панель" userData={userData} isLoading={isLoading}/>
-      <Aside />
+      <Aside userRole={userData.rolesName}/>
       <main className="lg:pl-20 px-6 pt-32 h-[100vh]">
         <Background>
           <div
-            className={`w-[100%] h-[100%] bg-milk rounded-2xl p-10 flex flex-wrap gap-x-10 gap-y-0 justify-center`}
+            className={`w-[100%] h-[100%] bg-milk dark:bg-dark-coffee rounded-2xl p-10 flex flex-wrap gap-x-10 gap-y-0 justify-center`}
           >
             {buttons.map((item) => 
               <button
                 key={item.name}
-                className="bg-white border-2 border-chocolate box-border rounded-2xl min-w-70 h-[30%] p-5 text-waffle"
+                className="bg-white dark:bg-dark-chocolate dark:border-dark-milk border-2 border-chocolate box-border rounded-2xl min-w-70 h-[30%] p-5 text-waffle dark:text-dark-milk"
                 onClick={() =>
                 setIsShow({
                   status: true,

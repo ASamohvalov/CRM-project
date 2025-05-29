@@ -8,10 +8,10 @@
   --color-waffle: #c08552;
   --color-chocolate: #895737;
 
-  --color-dark-coffee: #F1D881;
-  --color-dark-milk: #443020;
-  --color-dark-waffle: #C08552;
-  --color-dark-chocolate: #5B5643;
+  --color-dark-coffee: #5e3023;
+  --color-dark-milk: #d4c7b9;
+  --color-dark-waffle: #a66a3f;
+  --color-dark-chocolate: #b8774e;
 
   --animate-down-to-end: downToEnd 1s ease-in-out forwards;
   --animate-loading: loadBoner 2s ease-out infinite;
