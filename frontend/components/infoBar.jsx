@@ -1,4 +1,4 @@
-import { Loading } from "./loading";
+import { Loading } from "./features/loading";
 
 export function InfoBar({ userData, isLoading }) {
   return (

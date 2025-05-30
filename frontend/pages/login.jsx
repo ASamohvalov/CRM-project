@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { UiInput } from "../components/ui/uiInput";
-import { UiButton } from "../components/ui/uiButton";
-import { useRouter } from 'next/router';
+import { UiInput } from "../ui/uiInput";
+import { UiButton } from "../ui/uiButton";
+import { useRouter } from "next/router";
 import * as env from "../env";
 
 function LoginPage() {
@@ -15,7 +15,7 @@ function LoginPage() {
 
   async function formHandler(e) {
     e.preventDefault();
-    try {      
+    try {
       const responce = await fetch(env.BACKEND_API_URL + "/auth/sign_in", {
         method: "POST",
         headers: {
@@ -28,7 +28,7 @@ function LoginPage() {
         localStorage.setItem("accessToken", jsonRes.accessToken);
         localStorage.setItem("refreshToken", jsonRes.refreshToken);
         document.cookie = `accessToken = ${jsonRes.accessToken}`;
-        router.push('/');
+        router.push("/");
       } else {
         setErrMessage(true);
       }
@@ -39,12 +39,14 @@ function LoginPage() {
 
   return (
     <div className="w-[100vw] h-[100vh] flex justify-center items-center">
-      <div className="w-80 h-[60vh] md:w-[30rem] md:h-[40rem] 2xl:w-[28vw] 2xl:h-[70vh] bg-waffle rounded-3xl px-7 py-7">
+      <div className="w-fit h-fit md:w-[30rem] md:h-[40rem] 2xl:w-[28vw] 2xl:h-[70vh] bg-waffle rounded-3xl px-4 md:px-7 py-4 md:py-7">
         <form
           onSubmit={formHandler}
-          className="bg-coffee w-[100%] h-[100%] rounded-2xl text-milk flex flex-col pt-16 px-14"
+          className="bg-coffee w-[100%] h-[100%] rounded-2xl text-milk flex flex-col py-12 md:pt-16 px-10 md:px-14"
         >
-          <h1 className="text-4xl mx-auto mb-16">Авторизация</h1>
+          <h1 className="text-xl md:text-4xl mx-auto mb-8 md:mb-16">
+            Авторизация
+          </h1>
           <UiInput
             placeholder={"Логин"}
             required
@@ -62,21 +64,25 @@ function LoginPage() {
               setFormInput({ ...formInput, password: e.target.value })
             }
           ></UiInput>
-          {errMessage ? (
-            <p className="text-red-400 text-center">Логин или пароль неверны <br/><span className="text-sm">(или наш сервер лег)</span></p>
-          ) : (
-            ""
-          )}
+
           <UiButton
-          onClick={()=> console.log('efef')
-          }
-          type="submit"
-            className={`${
-              errMessage ? "mt-13" : "mt-16"
-            } bg-waffle py-3 px-4 rounded-2xl text-3xl mx-auto w-[100%] max-w-64`}
+            onClick={() => console.log("efef")}
+            type="submit"
+            className={`
+            } bg-waffle py-2 md:py-3 px-2 md:px-4 mb-5 rounded-lg md:rounded-2xl text-xl md:text-3xl mx-auto w-[100%] max-w-64`}
           >
             Войти
           </UiButton>
+          {errMessage ? (
+            <p className="text-red-400 text-center text-sm md:text-lg">
+              Логин или пароль неверны <br />
+              <span className="text-[10px] md:text-sm">
+                (или наш сервер лег)
+              </span>
+            </p>
+          ) : (
+            ""
+          )}
         </form>
       </div>
     </div>

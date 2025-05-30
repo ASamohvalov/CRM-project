@@ -20,7 +20,7 @@ function AdminPage() {
   const buttons = [
     { purpose: "AddWorker", name: "Добавить сотрудника", handler: addQualifyHandler },
     { purpose: "AddTask", name: "Добавить задачу", handler: addQualifyHandler },
-    { purpose: "AddCategory", name: "Добавить категорию", handler: addQualifyHandler },
+    { purpose: "AddCategory", name: "Добавить категорию", handler: addCategoryHandler },
     { purpose: "AddQualify", name: "Добавить квалификацию", handler: addQualifyHandler },
     { purpose: "AddTitle", name: "Добавить должность", handler: addJobHandler },
     { purpose: "GetWork", name: "Узнать должности", handler: getTitlesHandler },
@@ -28,7 +28,11 @@ function AdminPage() {
   ];
   function addJobHandler(e, sm, sm2) {
     e.preventDefault();
-    if (jobTitleId || qualificationName == "") {
+    console.log(sm,sm2);
+    
+    if (sm === "" || sm2 === "") {
+      console.log("fwefwef");
+      
       return;
     }
     const accessToken = localStorage.getItem("accessToken");
@@ -39,7 +43,7 @@ function AdminPage() {
         Authorization: `Bearer ${accessToken}`,
       },
       body: JSON.stringify({ name: sm, description: sm2 }),
-    });
+    });    
   }
 
   async function getTitlesHandler() {
@@ -82,7 +86,7 @@ function AdminPage() {
   }
   async function addQualifyHandler(e, jobTitleId, qualificationName) {
     e.preventDefault();
-    if (jobTitleId || qualificationName == "") {
+    if (jobTitleId === "" || qualificationName === "") {
       return;
     }
     const accessToken = localStorage.getItem("accessToken");
@@ -96,6 +100,29 @@ function AdminPage() {
         body: JSON.stringify({
           jobTitleId: jobTitleId,
           qualificationName: qualificationName,
+        }),
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async function addCategoryHandler(e, categoryName, categoryDescription) {
+    e.preventDefault();
+    if (categoryName === "" || categoryDescription === "") {
+      return;
+    }
+    const accessToken = localStorage.getItem("accessToken");
+    try {
+      fetch(env.BACKEND_API_URL + "/task/add_task_category", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          name: categoryName,
+          description: categoryDescription,
         }),
       });
     } catch (e) {

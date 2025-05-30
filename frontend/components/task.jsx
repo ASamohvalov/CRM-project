@@ -1,4 +1,4 @@
-import { Loading } from "./loading";
+import { Loading } from "./features/loading";
 
 export function Task({ header, children, points, isLoading }) {
   return (
@@ -10,12 +10,12 @@ export function Task({ header, children, points, isLoading }) {
           <h3 className="text-2xl">{header}</h3>
         )}
         {isLoading ? (
-            <>
+          <>
             <Loading className={"h-4 mt-3 w-[65vw]"} />
             <Loading className={"h-4 mt-2 w-[20vw]"} />
-            </>
+          </>
         ) : (
-        <p className="max-w-[80vw]">{children}</p>
+          <p className="max-w-[80vw]">{children}</p>
         )}
       </div>
       <div className="h-[80%] w-[2px] bg-chocolate my-auto ml-auto"></div>

@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Loading, Theme } from "./";
+import { BurgerMenu, Loading, Theme } from "./features";
 
 function mousehandler(e) {
+  if (document.documentElement.clientWidth <= 768) return;
   if (e.type == "mouseover")
     document
       .querySelectorAll("#ok")
@@ -16,7 +17,7 @@ export function Header({ title, userData, isLoading }) {
   const [isClicked, setClicked] = useState(false);
 
   function burgerClickHandle() {
-    if (document.documentElement.clientWidth > 1024) return;
+    if (document.documentElement.clientWidth > 768) return;
     if (!isClicked) {
       document
         .querySelectorAll("#ok")
@@ -48,7 +49,7 @@ export function Header({ title, userData, isLoading }) {
             id="ok"
           >
             {isLoading ? (
-              <Loading className={"min-w-36 h-10 "}/>
+              <Loading className={"min-w-36 h-10 "} />
             ) : (
               <h1 className="pl-2 text-nowrap">
                 {userData?.lastName} {userData?.firstName}{" "}
@@ -60,13 +61,7 @@ export function Header({ title, userData, isLoading }) {
           </div>
         </div>
         {isClicked && (
-          <div
-            className={
-              "lg:hidden flex flex-col w-[327px] mx-auto gap-5 bg-coffee rounded-lg p-4 -bottom-52"
-            }
-          >
-            huhuhuhuhuhuhu
-          </div>
+          <BurgerMenu userData={userData} isLoading={isLoading} />
         )}
       </header>
     </div>

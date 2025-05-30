@@ -1,4 +1,4 @@
-import { UIModal } from "./ui/uiModal";
+import { UIModal } from "../ui/uiModal";
 export function Modal({ handler, purpose, isShow }) {
   return (
     <UIModal isShow={isShow}>
@@ -7,7 +7,7 @@ export function Modal({ handler, purpose, isShow }) {
       ) : purpose === "AddTask" ? (
         <UIModal.AddTitle handler={handler}></UIModal.AddTitle>
       ) : purpose === "AddCategory" ? (
-        <UIModal.AddTitle handler={handler}></UIModal.AddTitle>
+        <UIModal.AddCategory handler={handler}>Категория</UIModal.AddCategory>
       ) : purpose === "AddQualify" ? (
         <UIModal.AddWork handler={handler}>Квалификация</UIModal.AddWork>
       ) : purpose === "AddTitle" ? (

@@ -8,7 +8,7 @@ export function Aside({ userRole = [] }) {
   
   return (
     <aside
-      className={`hidden lg:block pt-[15vh] absolute top-0 h-[100%] ${
+      className={`hidden md:block pt-[15vh] absolute top-0 h-[100%] ${
         hidden ? "w-44" : "w-14"
       } bg-coffee dark:bg-dark-waffle text-milk dark:text-dark-milk text-2xl transition-all hover:w-44  rounded-r-2xl overflow-hidden`}
       onClick={() => setHidden((value) => !value)}
@@ -29,7 +29,7 @@ export function Aside({ userRole = [] }) {
           Задачи
         </p>
       </Link>
-      {userRole.find(item=>item==="ROLE_ADMIN") ? (
+      {userRole?.find(item=>item==="ROLE_ADMIN") ? (
         <Link
           href="./admin"
           className="pl-1 flex relative items-center mt-5 mx-auto before:bg-white before:absolute before:bottom-[-10px] before:left-0 hover:before:animate-down-to-end hover:before:h-[2px] transition-all"
