@@ -12,8 +12,12 @@ export function Modal({ handler, purpose, isShow }) {
         <UIModal.AddWork handler={handler}>Квалификация</UIModal.AddWork>
       ) : purpose === "AddTitle" ? (
         <UIModal.AddWork handler={handler}>Должность</UIModal.AddWork>
-      ) : purpose === "GetWork" ? (
-        <UIModal.GetWork handler={handler}></UIModal.GetWork>
+      ) : purpose === "GetTitle" ? (
+        <UIModal.GetWork handler={handler}>Должности</UIModal.GetWork>
+      ) : purpose === "GetQualify" ? (
+        <UIModal.GetWork handler={handler}>Квалификации</UIModal.GetWork>
+      ) : purpose === "GetCategories" ? (
+        <UIModal.GetWork handler={handler}>Категории</UIModal.GetWork>
       ) : (
         <></>
       )}
