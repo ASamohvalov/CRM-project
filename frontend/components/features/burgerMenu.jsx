@@ -7,7 +7,7 @@ export function BurgerMenu({ userData, isLoading }) {
   return (
     <div
       className={
-        "lg:hidden border-dark-milk border-2 flex flex-col w-[327px] mx-auto gap-5 bg-coffee dark:bg-dark-coffee rounded-t-lg rounded-b-xl -bottom-52"
+        "lg:hidden border-dark-milk border-2 flex flex-col w-[327px] mx-auto gap-5 bg-coffee dark:bg-dark-coffee rounded-t-lg rounded-b-xl -bottom-52 z-50"
       }
     >
       <div className="px-4 pt-4">

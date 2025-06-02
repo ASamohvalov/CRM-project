@@ -5,7 +5,7 @@ export function Modal({ handler, purpose, isShow }) {
       {purpose === "AddWorker" ? (
         <UIModal.AddTitle handler={handler}></UIModal.AddTitle>
       ) : purpose === "AddTask" ? (
-        <UIModal.AddTitle handler={handler}></UIModal.AddTitle>
+        <UIModal.AddTask handler={handler}></UIModal.AddTask>
       ) : purpose === "AddCategory" ? (
         <UIModal.AddCategory handler={handler}>Категория</UIModal.AddCategory>
       ) : purpose === "AddQualify" ? (

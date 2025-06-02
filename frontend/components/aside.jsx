@@ -8,7 +8,7 @@ export function Aside({ userRole = [] }) {
   
   return (
     <aside
-      className={`hidden md:block pt-[15vh] absolute top-0 h-[100%] ${
+      className={`hidden md:block pt-[15vh] absolute top-0 h-[100%] z-50 ${
         hidden ? "w-44" : "w-14"
       } bg-coffee dark:bg-dark-waffle text-milk dark:text-dark-milk text-2xl transition-all hover:w-44  rounded-r-2xl overflow-hidden`}
       onClick={() => setHidden((value) => !value)}

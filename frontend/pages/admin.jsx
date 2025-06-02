@@ -23,7 +23,7 @@ function AdminPage() {
       name: "Добавить сотрудника",
       handler: addCategoryHandler,
     },
-    { purpose: "AddTask", name: "Добавить задачу", handler: addQualifyHandler },
+    { purpose: "AddTask", name: "Добавить задачу", handler: addTaskHandler },
     {
       purpose: "AddCategory",
       name: "Добавить категорию",
@@ -51,6 +51,34 @@ function AdminPage() {
       handler: () => getHandler("/task/get/task_categories"),
     },
   ];
+
+  function addTaskHandler(e, name, description, points, deadline, categoryId) {
+    e.preventDefault();
+    if (name === "" || description === "" || points === "" || deadline === "" || categoryId === "") {
+      return;
+    }
+    const accessToken = localStorage.getItem("accessToken");
+    try {
+      fetch(env.BACKEND_API_URL + "/task/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          name: name,
+          description: description,
+          numberOfPoints: Number(points),
+          deadline: deadline,
+          taskCategoryId: categoryId
+        }),
+      });
+      console.log("s");
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   function addJobHandler(e, jobName, jobDescription) {
     e.preventDefault();
 
@@ -58,14 +86,18 @@ function AdminPage() {
       return;
     }
     const accessToken = localStorage.getItem("accessToken");
-    fetch(env.BACKEND_API_URL + "/admin/add_job_title", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({ name: jobName, description: jobDescription }),
-    });
+    try {
+      fetch(env.BACKEND_API_URL + "/admin/add_job_title", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({ name: jobName, description: jobDescription }),
+      });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   async function addQualifyHandler(e, jobTitleId, qualificationName) {
@@ -75,7 +107,6 @@ function AdminPage() {
     }
     const accessToken = localStorage.getItem("accessToken");
     try {
-      
       fetch(env.BACKEND_API_URL + "/admin/add_qualification", {
         method: "POST",
         headers: {

@@ -7,7 +7,7 @@ export function Background({ children, scale=1 }) {
   }[scale]
   return (
     <div className="w-[84vw] h-[80%] mt-5 mx-auto lg:pr-16">
-      <div className={clsx("bg-waffle dark:bg-dark-chocolate rounded-2xl p-4 overflow-y-auto", choose)}>
+      <div className={clsx("bg-waffle dark:bg-dark-chocolate rounded-2xl p-4 overflow-y-auto list", choose)}>
         {/* дописать отрисовку map  */}
         {children}
       </div>

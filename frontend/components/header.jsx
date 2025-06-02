@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BurgerMenu, Loading, Theme } from "./features";
+import { BurgerMenu, Filters, Loading, Theme } from "./features";
 
 function mousehandler(e) {
   if (document.documentElement.clientWidth <= 768) return;
@@ -19,21 +19,15 @@ export function Header({ title, userData, isLoading }) {
   function burgerClickHandle() {
     if (document.documentElement.clientWidth > 768) return;
     if (!isClicked) {
-      document
-        .querySelectorAll("#ok")
-        .forEach((el) => (el.style.display = "none"));
       setClicked(true);
     }
     if (isClicked) {
-      document
-        .querySelectorAll("#ok")
-        .forEach((el) => (el.style.display = "none"));
       setClicked(false);
     }
   }
 
   return (
-    <div className="fixed min-w-[100vw] pt-10">
+    <div className="fixed min-w-[100vw] pt-10 z-50">
       <header
         className="text-milk dark:text-dark-milk relative flex flex-col w-[100vw] max-h-96 lg:w-[100vw]"
         onClick={burgerClickHandle}
@@ -57,12 +51,14 @@ export function Header({ title, userData, isLoading }) {
               </h1>
             )}
             <Theme />
-            <h2 className="">Фильтры</h2>
+            <h2>Фильтры</h2>
+            
           </div>
         </div>
         {isClicked && (
           <BurgerMenu userData={userData} isLoading={isLoading} />
         )}
+        <Filters className="absolute -bottom-100 right-0"></Filters>
       </header>
     </div>
   );
