@@ -1,7 +1,7 @@
 package com.srt.CRMBackend.controllers;
 
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
-import com.srt.CRMBackend.services.EmployeeService;
+import com.srt.CRMBackend.services.employee.EmployeeService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

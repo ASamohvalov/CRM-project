@@ -9,16 +9,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-/**
- * задачи сотрудников и статус задачи
- */
 @Entity
-@Table(name = "employee_tasks")
+@Table(name = "task_execution_requests")
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmployeeTask {
+@Builder
+public class TaskExecutionRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -31,6 +28,5 @@ public class EmployeeTask {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    @Enumerated(EnumType.STRING)
-    private ExecutionStatus executionStatus = ExecutionStatus.IN_PROGRESS;
+    private boolean isAccepted = false;
 }

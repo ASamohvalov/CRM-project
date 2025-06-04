@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class UserDetailsImpl implements UserDetails {
@@ -24,5 +25,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return employee.getLogin();
+    }
+
+    public Employee getEmployee() {
+        return employee;
     }
 }

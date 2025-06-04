@@ -1,6 +1,5 @@
 package com.srt.CRMBackend.models.tasks;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -39,4 +37,8 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "task_category_id")
     private TaskCategory taskCategory;
+
+    public Task(UUID id) {
+        this.id = id;
+    }
 }

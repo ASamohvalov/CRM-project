@@ -41,4 +41,8 @@ public class Employee {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    public Employee(UUID id) {
+        this.id = id;
+    }
 }

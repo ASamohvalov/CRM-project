@@ -2,7 +2,8 @@ package com.srt.CRMBackend.controllers.privilege;
 
 import com.srt.CRMBackend.DTO.admin.QualificationResponse;
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
-import com.srt.CRMBackend.DTO.employee.JobTitleDto;
+import com.srt.CRMBackend.DTO.employee.JobTitleDTO;
+import com.srt.CRMBackend.DTO.task.TaskCategoryDTO;
 import com.srt.CRMBackend.services.ManagerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class ManagerController {
     private final ManagerService managerService;
 
     @GetMapping("/get_all_job_titles")
-    public List<JobTitleDto> getAllJobTitles() {
+    public List<JobTitleDTO> getAllJobTitles() {
         return managerService.getAllJobTitles();
     }
 
@@ -33,4 +34,6 @@ public class ManagerController {
     public List<EmployeeDTO> getAllEmployees() {
         return managerService.getAllEmployees();
     }
+
+
 }

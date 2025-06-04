@@ -2,7 +2,7 @@ package com.srt.CRMBackend.controllers.task;
 
 import com.srt.CRMBackend.DTO.task.TaskCategoryRequest;
 import com.srt.CRMBackend.DTO.task.TaskRequest;
-import com.srt.CRMBackend.services.TaskService;
+import com.srt.CRMBackend.services.task.TaskService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

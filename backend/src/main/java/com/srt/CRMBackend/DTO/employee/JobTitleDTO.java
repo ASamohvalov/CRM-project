@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class JobTitleDto {
+public class JobTitleDTO {
     private UUID id;
     private String name;
     private String description;

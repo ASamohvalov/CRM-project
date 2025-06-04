@@ -1,6 +1,6 @@
 package com.srt.CRMBackend.DTO.admin;
 
-import com.srt.CRMBackend.DTO.employee.JobTitleDto;
+import com.srt.CRMBackend.DTO.employee.JobTitleDTO;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,6 +10,6 @@ import java.util.UUID;
 @Builder
 public class QualificationResponse {
     private UUID id;
-    private JobTitleDto jobTitle;
+    private JobTitleDTO jobTitle;
     private String name;
 }

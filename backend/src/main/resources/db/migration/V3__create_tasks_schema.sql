@@ -21,8 +21,11 @@ CREATE TABLE tasks (
 -- Таблица: employee_tasks
 CREATE TABLE employee_tasks (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    description TEXT,
-    execution_status VARCHAR(50)
+    employee_id UUID,
+    task_id UUID,
+    execution_status VARCHAR(50) DEFAULT 'IN_PROGRESS',
+    CONSTRAINT fk_employee_tasks_employee FOREIGN KEY (employee_id) REFERENCES employees(id),
+    CONSTRAINT fk_employee_task_task FOREIGN KEY (task_id) REFERENCES tasks(id)
 );
 
 -- Таблица: qualification_level_for_task

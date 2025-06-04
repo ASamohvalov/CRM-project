@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JwtServiceImpl extends AbstractTokenUtil implements JwtService {
+public class JwtServiceImpl implements JwtService {
     @Autowired
     @Qualifier("accessTokenService")
     private TokenService accessTokenService;

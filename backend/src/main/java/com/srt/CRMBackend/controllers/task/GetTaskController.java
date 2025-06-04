@@ -2,7 +2,7 @@ package com.srt.CRMBackend.controllers.task;
 
 import com.srt.CRMBackend.DTO.task.TaskCategoryDTO;
 import com.srt.CRMBackend.DTO.task.TaskResponse;
-import com.srt.CRMBackend.services.TaskService;
+import com.srt.CRMBackend.services.task.TaskService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

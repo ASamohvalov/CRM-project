@@ -36,6 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/manager/**").hasAnyRole(new String[] {"ADMIN", "MANAGER"})
                         .requestMatchers("/task/get").authenticated()
                         .requestMatchers("/task/get/**").authenticated()
+                        .requestMatchers("/task/employee/**").authenticated()
                         .requestMatchers("/task/**").hasAnyRole(new String[] {"ADMIN", "MANAGER"})
                         .anyRequest().authenticated()
                 )

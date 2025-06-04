@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.services;
+package com.srt.CRMBackend.services.task;
 
 import com.srt.CRMBackend.DTO.task.TaskCategoryRequest;
 import com.srt.CRMBackend.DTO.task.TaskRequest;

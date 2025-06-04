@@ -2,24 +2,22 @@ package com.srt.CRMBackend.services.impl;
 
 import com.srt.CRMBackend.DTO.admin.QualificationResponse;
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
-import com.srt.CRMBackend.DTO.employee.JobTitleDto;
-import com.srt.CRMBackend.models.employees.Role;
-import com.srt.CRMBackend.repositories.employee.EmployeeRepository;
+import com.srt.CRMBackend.DTO.employee.JobTitleDTO;
 import com.srt.CRMBackend.repositories.employee.JobTitleRepository;
 import com.srt.CRMBackend.repositories.employee.QualificationRepository;
+import com.srt.CRMBackend.services.employee.EmployeeService;
 import com.srt.CRMBackend.services.ManagerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ManagerServiceImpl implements ManagerService {
     private final QualificationRepository qualificationRepository;
     private final JobTitleRepository jobTitleRepository;
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
 
     @Override
     public List<QualificationResponse> getAllQualifications() {
@@ -27,7 +25,7 @@ public class ManagerServiceImpl implements ManagerService {
                 .map(q -> QualificationResponse.builder()
                         .id(q.getId())
                         .name(q.getName())
-                        .jobTitle(JobTitleDto.builder()
+                        .jobTitle(JobTitleDTO.builder()
                                 .id(q.getJobTitle().getId())
                                 .name(q.getJobTitle().getName())
                                 .description(q.getJobTitle().getDescription()).build()
@@ -36,9 +34,9 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public List<JobTitleDto> getAllJobTitles() {
+    public List<JobTitleDTO> getAllJobTitles() {
         return jobTitleRepository.findAll().stream()
-                .map((jt) -> JobTitleDto.builder()
+                .map((jt) -> JobTitleDTO.builder()
                         .id(jt.getId())
                         .name(jt.getName())
                         .description(jt.getDescription()).build())
@@ -47,20 +45,6 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public List<EmployeeDTO> getAllEmployees() {
-        return employeeRepository.findAllWithRolesAndQualificationAndJobTitle().stream()
-                .map(e -> EmployeeDTO.builder()
-                        .login(e.getLogin())
-                        .email(e.getEmail())
-                        .firstName(e.getFullName().getFirstName())
-                        .lastName(e.getFullName().getLastName())
-                        .patronymic(e.getFullName().getPatronymic())
-                        .qualificationName(e.getQualification().getName())
-                        .jobTitleName(e.getQualification().getJobTitle().getName())
-                        .rolesName(
-                                e.getRoles().stream()
-                                        .map(Role::getAuthority)
-                                        .collect(Collectors.toSet())
-                        ).build()
-                ).toList();
+        return employeeService.getAllEmployees();
     }
 }
