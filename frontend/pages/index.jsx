@@ -21,7 +21,8 @@ function HomePage() {
   
     async function getTasks() {
         const accessToken = localStorage.getItem("accessToken");
-        const req = await fetch(env.BACKEND_API_URL + "/task/get", {
+        try{
+            const req = await fetch(env.BACKEND_API_URL + "/task/get", {
           method: "GET",
           headers: {
             "Content-Type": "application/json;charset=utf-8",
@@ -30,6 +31,11 @@ function HomePage() {
         });
         const res = await req.json();
         setTasks(await res);
+        }catch(e){
+          console.log(e);
+          
+        }
+        
       }
   return (
     <>

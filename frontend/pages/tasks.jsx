@@ -15,12 +15,12 @@ function TaskListPage() {
     getUserData({ setUserData, setIsLoading, router });
   }, []);
   useEffect(() => {
-    
     getTasks();
   }, []);
 
   async function getTasks() {
-      const accessToken = localStorage.getItem("accessToken");
+    const accessToken = localStorage.getItem("accessToken");
+    try {
       const req = await fetch(env.BACKEND_API_URL + "/task/get", {
         method: "GET",
         headers: {
@@ -30,8 +30,11 @@ function TaskListPage() {
       });
       const res = await req.json();
       setTasks(await res);
+    } catch (e) {
+      console.log(e);
     }
-  function onDelete(e,id) {
+  }
+  function onDelete(e, id) {
     e.stopPropagation();
     const accessToken = localStorage.getItem("accessToken");
     fetch(env.BACKEND_API_URL + "/task/delete/" + id, {
@@ -41,8 +44,8 @@ function TaskListPage() {
         Authorization: `Bearer ${accessToken}`,
       },
       body: {
-        taskId: id
-      }
+        taskId: id,
+      },
     });
     getTasks();
   }
