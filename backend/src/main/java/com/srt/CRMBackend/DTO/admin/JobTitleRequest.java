@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class AddJobTitleRequest {
+public class JobTitleRequest {
     @NotBlank
     private String name;
     @NotBlank

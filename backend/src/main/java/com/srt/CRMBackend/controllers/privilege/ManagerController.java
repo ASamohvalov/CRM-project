@@ -3,7 +3,6 @@ package com.srt.CRMBackend.controllers.privilege;
 import com.srt.CRMBackend.DTO.admin.QualificationResponse;
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
 import com.srt.CRMBackend.DTO.employee.JobTitleDTO;
-import com.srt.CRMBackend.DTO.task.TaskCategoryDTO;
 import com.srt.CRMBackend.services.ManagerService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +33,4 @@ public class ManagerController {
     public List<EmployeeDTO> getAllEmployees() {
         return managerService.getAllEmployees();
     }
-
-
 }

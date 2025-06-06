@@ -1,7 +1,7 @@
 package com.srt.CRMBackend.services.impl;
 
 import com.srt.CRMBackend.DTO.admin.AddEmployeeRequest;
-import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
+import com.srt.CRMBackend.DTO.admin.JobTitleRequest;
 import com.srt.CRMBackend.DTO.admin.AddQualificationRequest;
 import com.srt.CRMBackend.exceptions.admin.ValidationException;
 import com.srt.CRMBackend.exceptions.admin.ValidationOneFieldException;
@@ -13,9 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +46,7 @@ public class AdminServiceImpl implements AdminService {
                 .fullName(fullName)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .qualification(qualification)
-                .roles(Set.of(roleRepository.getByName("ROLE_EMPLOYEE"))).build();
+                .roles(Set.of(roleRepository.getByName(request.getRole()))).build();
         employeeRepository.save(employee);
 
         PersonalEmployeeData employeeData = PersonalEmployeeData.builder()
@@ -60,7 +58,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public void addJobTitle(AddJobTitleRequest request) {
+    public void addJobTitle(JobTitleRequest request) {
         if (jobTitleRepository.existsByName(request.getName())) {
             throw new ValidationException(
                     Map.of("name", "такая должность уже существует")
@@ -85,9 +83,27 @@ public class AdminServiceImpl implements AdminService {
         qualificationRepository.save(qualification);
     }
 
+    @Override
+    public void deleteJobTitle(UUID id) {
+        if (qualificationRepository.existsByJobTitleId(id)) {
+            throw new ValidationOneFieldException("для удаления должности необходимо удалить зависящие квалификации");
+        }
+        jobTitleRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteQualification(UUID id) {
+        if (employeeRepository.existsByQualificationId(id)) {
+            throw new ValidationOneFieldException("для удаления квалификации необходимо изменить должности сотрудникам с такой квалификацией");
+        }
+        qualificationRepository.deleteById(id);
+    }
 
     private void validateAddEmployee(AddEmployeeRequest request) {
         Map<String, String> errors = new HashMap<>();
+        if (List.of("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_EMPLOYEE").contains(request.getRole())) {
+            errors.put("role", "некорректная роль");
+        }
         if (employeeRepository.existsByLogin(request.getLogin())) {
             errors.put("login", "этот логин уже занят");
         }

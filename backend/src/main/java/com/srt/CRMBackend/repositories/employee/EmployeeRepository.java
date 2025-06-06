@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
-
     boolean existsByLogin(String login);
     boolean existsByEmail(String email);
 
@@ -36,4 +35,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
         LEFT JOIN FETCH eq.jobTitle
         """)
     List<Employee> findAllWithRolesAndQualificationAndJobTitle();
+
+
+    @Query("""
+        SELECT count(e) > 0 FROM Employee e
+        WHERE e.qualification.id = :qualificationId
+    """)
+    boolean existsByQualificationId(UUID qualificationId);
 }
