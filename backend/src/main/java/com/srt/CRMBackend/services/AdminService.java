@@ -13,4 +13,5 @@ public interface AdminService {
 
     void deleteJobTitle(UUID id);
     void deleteQualification(UUID id);
+    void deleteEmployee(UUID id);
 }

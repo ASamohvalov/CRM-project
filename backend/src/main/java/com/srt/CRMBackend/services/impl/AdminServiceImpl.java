@@ -8,6 +8,7 @@ import com.srt.CRMBackend.exceptions.admin.ValidationOneFieldException;
 import com.srt.CRMBackend.models.employees.*;
 import com.srt.CRMBackend.repositories.employee.*;
 import com.srt.CRMBackend.services.AdminService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class AdminServiceImpl implements AdminService {
     private final QualificationRepository qualificationRepository;
     private final JobTitleRepository jobTitleRepository;
     private final PersonalEmployeeDataRepository personalEmployeeDataRepository;
+    private final PointRepository pointRepository;
 
     @Override
     public void addEmployee(AddEmployeeRequest request) {
@@ -99,9 +101,17 @@ public class AdminServiceImpl implements AdminService {
         qualificationRepository.deleteById(id);
     }
 
+    @Transactional
+    @Override
+    public void deleteEmployee(UUID id) {
+        personalEmployeeDataRepository.deleteByEmployeeId(id);
+        pointRepository.deleteByEmployeeId(id);
+        employeeRepository.deleteById(id);
+    }
+
     private void validateAddEmployee(AddEmployeeRequest request) {
         Map<String, String> errors = new HashMap<>();
-        if (List.of("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_EMPLOYEE").contains(request.getRole())) {
+        if (!List.of("ROLE_ADMIN", "ROLE_MANAGER", "ROLE_EMPLOYEE").contains(request.getRole())) {
             errors.put("role", "некорректная роль");
         }
         if (employeeRepository.existsByLogin(request.getLogin())) {

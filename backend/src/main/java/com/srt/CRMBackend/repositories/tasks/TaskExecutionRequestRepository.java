@@ -21,4 +21,12 @@ public interface TaskExecutionRequestRepository extends JpaRepository<TaskExecut
         WHERE ter.isAccepted = false
     """)
     List<TaskExecutionRequest> findAllUnacceptedWithEmployeeAndTask();
+
+    @Query("""
+        SELECT ter FROM TaskExecutionRequest ter
+        JOIN FETCH ter.task
+        JOIN FETCH ter.task.taskCategory
+        WHERE ter.employee.id = :employeeId
+    """)
+    List<TaskExecutionRequest> findAllByEmployeeIdWithTask(UUID employeeId);
 }

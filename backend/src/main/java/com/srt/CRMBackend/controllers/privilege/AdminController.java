@@ -133,4 +133,11 @@ public class AdminController {
         adminService.deleteQualification(qualificationId);
         return Map.of("message", "квалификация успешно удалена");
     }
+
+//    todo
+//    @DeleteMapping("/delete/employee/{employeeId}")
+//    public Map<String, String> deleteEmployee(@PathVariable UUID employeeId) {
+//        adminService.deleteEmployee(employeeId);
+//        return Map.of("message", "работник успешно удален");
+//    }
 }
