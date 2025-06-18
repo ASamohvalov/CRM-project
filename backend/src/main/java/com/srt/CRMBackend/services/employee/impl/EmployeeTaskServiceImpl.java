@@ -1,9 +1,11 @@
 package com.srt.CRMBackend.services.employee.impl;
 
 import com.srt.CRMBackend.DTO.task.GetTaskEmployeeRequests;
+import com.srt.CRMBackend.DTO.task.TaskResponse;
 import com.srt.CRMBackend.auth.UserDetailsImpl;
 import com.srt.CRMBackend.exceptions.CrmBadRequestException;
 import com.srt.CRMBackend.mappers.TaskExecutionRequestMapper;
+import com.srt.CRMBackend.mappers.TaskMapper;
 import com.srt.CRMBackend.models.employees.Employee;
 import com.srt.CRMBackend.models.tasks.EmployeeTask;
 import com.srt.CRMBackend.models.tasks.Task;
@@ -27,6 +29,7 @@ public class EmployeeTaskServiceImpl implements EmployeeTaskService {
     private final EmployeeTaskRepository employeeTaskRepository;
     private final TaskExecutionRequestMapper taskExecutionRequestMapper;
     private final TaskRepository taskRepository;
+    private final TaskMapper taskMapper;
 
     @Override
     public void takeTask(UUID taskId) {
@@ -58,5 +61,13 @@ public class EmployeeTaskServiceImpl implements EmployeeTaskService {
                         userDetails.getEmployee().getId()).stream()
                 .map(taskExecutionRequestMapper::toGetTaskEmployeeRequests)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TaskResponse> getAllTasks() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        return employeeTaskRepository.findAllTasksByEmployeeId(userDetails.getEmployee().getId())
+                .stream().map((t) -> taskMapper.toTaskResponse(t.getTask())).toList();
     }
 }
