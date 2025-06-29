@@ -1,7 +1,7 @@
 package com.srt.CRMBackend.mockmvc.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
+import com.srt.CRMBackend.DTO.admin.JobTitleRequest;
 import com.srt.CRMBackend.models.employees.JobTitle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -20,7 +20,7 @@ public class UntitledJobTitleUtil {
 
     public JobTitle getJobTitle(MockMvc mockMvc) throws Exception {
         if (jobTitle == null) {
-            AddJobTitleRequest request = AddJobTitleRequest.builder()
+            JobTitleRequest request = JobTitleRequest.builder()
                     .name("untitled")
                     .description("untitled").build();
             String token = defaultAdminAuthentication.getAccessToken(mockMvc);

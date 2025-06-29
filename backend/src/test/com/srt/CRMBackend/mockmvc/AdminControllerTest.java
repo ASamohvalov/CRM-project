@@ -1,7 +1,7 @@
 package com.srt.CRMBackend.mockmvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.srt.CRMBackend.DTO.admin.AddJobTitleRequest;
+import com.srt.CRMBackend.DTO.admin.JobTitleRequest;
 import com.srt.CRMBackend.DTO.admin.AddQualificationRequest;
 import com.srt.CRMBackend.mockmvc.utils.DefaultAdminAuthentication;
 import com.srt.CRMBackend.mockmvc.utils.TestDataFactory;
@@ -61,7 +61,7 @@ class AdminControllerTest {
 
     @Test
     void addJobTitleTest() throws Exception {
-        AddJobTitleRequest request = AddJobTitleRequest.builder()
+        JobTitleRequest request = JobTitleRequest.builder()
                 .name("untitled1")
                 .description("untitled1").build();
         String token = defaultAdminAuthentication.getAccessToken(mockMvc);

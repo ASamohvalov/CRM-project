@@ -41,6 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeDTO toEmployeeDTO(Employee employee) {
         Optional<Qualification> qualification = Optional.ofNullable(employee.getQualification());
         return EmployeeDTO.builder()
+                .id(employee.getId())
                 .login(employee.getLogin())
                 .email(employee.getEmail())
                 .firstName(employee.getFullName().getFirstName())

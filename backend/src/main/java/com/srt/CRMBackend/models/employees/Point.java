@@ -25,7 +25,7 @@ public class Point {
     @Temporal(TemporalType.DATE)
     private Date lastUpdate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 }

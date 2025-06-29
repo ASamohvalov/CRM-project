@@ -2,6 +2,7 @@ package com.srt.CRMBackend.controllers.task;
 
 import com.srt.CRMBackend.DTO.request.TaskExecutionRequestDTO;
 import com.srt.CRMBackend.services.task.RequestService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @RequestMapping("/task/requests")
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "работа с заявками", description = "все методы доступны менеджерам и админам")
 public class RequestController {
     private final RequestService requestService;
 

@@ -16,4 +16,10 @@ public interface QualificationRepository extends JpaRepository<Qualification, UU
         JOIN FETCH JobTitle jt ON q.jobTitle.id = jt.id
     """)
     List<Qualification> findAllWithJobTitle();
+
+    @Query("""
+        SELECT count(q) > 0 FROM Qualification q
+        WHERE q.jobTitle.id = :jobTitleId
+    """)
+    boolean existsByJobTitleId(UUID jobTitleId);
 }
