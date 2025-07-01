@@ -2,11 +2,9 @@ package com.srt.CRMBackend.services.employee.impl;
 
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
 import com.srt.CRMBackend.auth.UserDetailsImpl;
-import com.srt.CRMBackend.models.employees.Employee;
-import com.srt.CRMBackend.models.employees.JobTitle;
-import com.srt.CRMBackend.models.employees.Qualification;
-import com.srt.CRMBackend.models.employees.Role;
+import com.srt.CRMBackend.models.employees.*;
 import com.srt.CRMBackend.repositories.employee.EmployeeRepository;
+import com.srt.CRMBackend.repositories.employee.PointRepository;
 import com.srt.CRMBackend.services.employee.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -20,6 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final PointRepository pointRepository;
 
     @Override
     public EmployeeDTO getEmployeeData() {
@@ -62,5 +61,15 @@ public class EmployeeServiceImpl implements EmployeeService {
                                 .collect(Collectors.toSet())
                 )
                 .build();
+    }
+
+
+    @Override
+    public int getCountOfPointers() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        Optional<Point> point = pointRepository.findByEmployeeId(
+                userDetails.getEmployee().getId());
+        return point.map(Point::getTotal).orElse(0);
     }
 }

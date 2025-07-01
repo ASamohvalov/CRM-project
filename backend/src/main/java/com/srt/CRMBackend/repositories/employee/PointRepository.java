@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public interface PointRepository extends JpaRepository<Point, UUID> {
@@ -14,4 +15,10 @@ public interface PointRepository extends JpaRepository<Point, UUID> {
         WHERE p.employee.id = :employeeId
     """)
     void deleteByEmployeeId(UUID employeeId);
+
+    @Query("""
+        SELECT p FROM Point p
+        WHERE p.employee.id = :employeeId
+    """)
+    Optional<Point> findByEmployeeId(UUID employeeId);
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface EmployeeService {
     EmployeeDTO getEmployeeData();
     List<EmployeeDTO> getAllEmployees();
+
+    int getCountOfPointers();
 }

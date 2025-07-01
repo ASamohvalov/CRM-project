@@ -2,11 +2,14 @@ package com.srt.CRMBackend.controllers;
 
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
 import com.srt.CRMBackend.services.employee.EmployeeService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
@@ -20,4 +23,10 @@ public class EmployeeController {
         return employeeService.getEmployeeData();
     }
 
+
+    @Operation(description = "получение количества очков")
+    @GetMapping("/get_points")
+    public Map<String, Integer> getPointers() {
+        return Map.of("points", employeeService.getCountOfPointers());
+    }
 }
