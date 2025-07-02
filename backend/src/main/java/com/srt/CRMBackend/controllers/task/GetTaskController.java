@@ -3,6 +3,7 @@ package com.srt.CRMBackend.controllers.task;
 import com.srt.CRMBackend.DTO.task.TaskCategoryDTO;
 import com.srt.CRMBackend.DTO.task.TaskResponse;
 import com.srt.CRMBackend.services.task.TaskService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.util.List;
 public class GetTaskController {
     private final TaskService taskService;
 
+    @Operation(description = "менеджеры и админы получают все задачи, при этом сотрудники только свободные")
     @GetMapping
     public List<TaskResponse> getAllTasks() {
         return taskService.getAllTasks();

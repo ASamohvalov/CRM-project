@@ -1,4 +1,4 @@
-package com.srt.CRMBackend.controllers;
+package com.srt.CRMBackend.controllers.employee;
 
 import com.srt.CRMBackend.DTO.employee.EmployeeDTO;
 import com.srt.CRMBackend.services.employee.EmployeeService;

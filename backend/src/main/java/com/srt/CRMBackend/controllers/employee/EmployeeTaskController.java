@@ -42,6 +42,14 @@ public class EmployeeTaskController {
     @Operation(description = "получение всех задач у сотрудника (даже выполненных)")
     @GetMapping("/get_all_tasks")
     public List<TaskResponse> getAllTasks() {
+        log.info("call get all tasks");
         return employeeTaskService.getAllTasks();
+    }
+
+    @Operation(description = "отправка заявки на проверку задачи")
+    @GetMapping("/send_task_for_review/{taskId}")
+    public Map<String, String> sendRequestForReview() {
+        // todo проверка принадлежит ли задача пользователю, отправка заявки
+        return null;
     }
 }

@@ -10,10 +10,12 @@ import com.srt.CRMBackend.models.employees.Employee;
 import com.srt.CRMBackend.models.tasks.EmployeeTask;
 import com.srt.CRMBackend.models.tasks.Task;
 import com.srt.CRMBackend.models.tasks.TaskExecutionRequest;
+import com.srt.CRMBackend.models.tasks.TaskStatus;
 import com.srt.CRMBackend.repositories.tasks.EmployeeTaskRepository;
 import com.srt.CRMBackend.repositories.tasks.TaskExecutionRequestRepository;
 import com.srt.CRMBackend.repositories.tasks.TaskRepository;
 import com.srt.CRMBackend.services.employee.EmployeeTaskService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -32,11 +34,11 @@ public class EmployeeTaskServiceImpl implements EmployeeTaskService {
     private final TaskMapper taskMapper;
 
     @Override
+    @Transactional
     public void takeTask(UUID taskId) {
         if (!taskRepository.existsById(taskId)) {
             throw new CrmBadRequestException("некорректный идентификатор");
         }
-
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
                 .getAuthentication().getPrincipal();
 
@@ -44,6 +46,9 @@ public class EmployeeTaskServiceImpl implements EmployeeTaskService {
                 .task(new Task(taskId))
                 .employee(userDetails.getEmployee()).build();
         taskExecutionRequestRepository.save(taskExecutionRequest);
+
+        Task task = taskRepository.findById(taskId).orElseThrow(RuntimeException::new);
+        task.setStatus(TaskStatus.IN_PROGRESS);
     }
 
     @Override
