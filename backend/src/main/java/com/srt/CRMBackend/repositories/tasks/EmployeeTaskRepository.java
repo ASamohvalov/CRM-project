@@ -1,6 +1,7 @@
 package com.srt.CRMBackend.repositories.tasks;
 
 import com.srt.CRMBackend.models.tasks.EmployeeTask;
+import com.srt.CRMBackend.models.tasks.ExecutionStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -16,4 +17,10 @@ public interface EmployeeTaskRepository extends JpaRepository<EmployeeTask, UUID
                 WHERE et.employee.id = :employeeId
             """)
     List<EmployeeTask> findAllTasksByEmployeeId(UUID employeeId);
+
+    @Query("""
+                SELECT et FROM EmployeeTask et
+                WHERE et.executionStatus = :status
+            """)
+    List<EmployeeTask> findByExecutionStatus(ExecutionStatus status);
 }

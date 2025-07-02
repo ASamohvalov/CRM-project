@@ -7,10 +7,7 @@ import com.srt.CRMBackend.exceptions.CrmBadRequestException;
 import com.srt.CRMBackend.mappers.TaskExecutionRequestMapper;
 import com.srt.CRMBackend.mappers.TaskMapper;
 import com.srt.CRMBackend.models.employees.Employee;
-import com.srt.CRMBackend.models.tasks.EmployeeTask;
-import com.srt.CRMBackend.models.tasks.Task;
-import com.srt.CRMBackend.models.tasks.TaskExecutionRequest;
-import com.srt.CRMBackend.models.tasks.TaskStatus;
+import com.srt.CRMBackend.models.tasks.*;
 import com.srt.CRMBackend.repositories.tasks.EmployeeTaskRepository;
 import com.srt.CRMBackend.repositories.tasks.TaskExecutionRequestRepository;
 import com.srt.CRMBackend.repositories.tasks.TaskRepository;
@@ -74,5 +71,21 @@ public class EmployeeTaskServiceImpl implements EmployeeTaskService {
                 .getAuthentication().getPrincipal();
         return employeeTaskRepository.findAllTasksByEmployeeId(userDetails.getEmployee().getId())
                 .stream().map((t) -> taskMapper.toTaskResponse(t.getTask())).toList();
+    }
+
+    @Override
+    @Transactional
+    public void sendRequestForReview(UUID taskId) {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        List<EmployeeTask> tasks = employeeTaskRepository.findAllTasksByEmployeeId(userDetails.getEmployee().getId());
+        for (EmployeeTask employeeTask : tasks) {
+            System.out.println(employeeTask.getTask().getId());
+            if (employeeTask.getTask().getId().equals(taskId)) {
+                employeeTask.setExecutionStatus(ExecutionStatus.SUBMITTED_FOR_REVIEW);
+                return;
+            }
+        }
+        throw new CrmBadRequestException("данная задача не найдена у пользователя");
     }
 }

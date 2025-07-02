@@ -48,8 +48,8 @@ public class EmployeeTaskController {
 
     @Operation(description = "отправка заявки на проверку задачи")
     @GetMapping("/send_task_for_review/{taskId}")
-    public Map<String, String> sendRequestForReview() {
-        // todo проверка принадлежит ли задача пользователю, отправка заявки
-        return null;
+    public Map<String, String> sendRequestForReview(@PathVariable UUID taskId) {
+        employeeTaskService.sendRequestForReview(taskId);
+        return Map.of("message", "заявка отправлена");
     }
 }
