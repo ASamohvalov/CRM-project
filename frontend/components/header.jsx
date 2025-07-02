@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { BurgerMenu, Filters, Loading, Theme } from "./features";
+import { useEffect, useState } from "react";
+import { BurgerMenu, Loading, Theme } from "./features";
+import * as env from "../env";
+import { UiInput } from "../ui/uiInput";
 
 function mousehandler(e) {
   if (document.documentElement.clientWidth <= 768) return;
@@ -12,9 +14,30 @@ function mousehandler(e) {
       .querySelectorAll("#ok")
       .forEach((el) => (el.style.display = "none"));
 }
+async function getCategories(setter) {
+  const accessToken = localStorage.getItem("accessToken");
+  try {
+    const req = await fetch(env.BACKEND_API_URL + "/task/get/task_categories", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const res = await req.json();
+    setter(await res);
+  } catch (e) {
+    console.log(e);
+  }
+}
 
-export function Header({ title, userData, isLoading }) {
+export function Header({ title, userData, isLoading, tasks = false, setLine, searchText, setSearchText }) {
   const [isClicked, setClicked] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [numOfClicks, setNumOfClicks] = useState(0);
+  useEffect(() => {
+    getCategories(setCategories);
+  }, []);
 
   function burgerClickHandle() {
     if (document.documentElement.clientWidth > 768) return;
@@ -42,23 +65,60 @@ export function Header({ title, userData, isLoading }) {
             className="hidden items-center text-[28px] ml-auto gap-4 pr-10"
             id="ok"
           >
+            {tasks ? (
+              <input
+                name="searchTask"
+                placeholder="Название задачи"
+                type="text"
+                value={searchText}
+                onChange={(e)=> setSearchText(e.target.value)}
+                className={
+                  "ml-2 w-100px h-[80%] bg-chocolate dark:bg-dark-coffee text-md focus:outline-0 px-5 rounded-2xl"
+                }
+              />
+            ) : (
+              ""
+            )}
             {isLoading ? (
               <Loading className={"min-w-36 h-10 "} />
             ) : (
-              <h1 className="pl-2 text-nowrap">
+              <h1 className="text-nowrap">
                 {userData?.lastName} {userData?.firstName}{" "}
                 {userData?.patronymic}
               </h1>
             )}
             <Theme />
-            <h2>Фильтры</h2>
-            
+            {tasks ? (
+              <h2
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setNumOfClicks((prev) => {
+                    if (prev == categories.length) {
+                      setLine("");
+                      return 0;
+                    }
+                    setLine(categories[numOfClicks]?.id);
+                    return (prev += 1);
+                  });
+                }}
+              >
+                {numOfClicks ? categories[numOfClicks - 1]?.name : "Фильтры"}
+              </h2>
+            ) : (
+              ""
+            )}
           </div>
         </div>
         {isClicked && (
-          <BurgerMenu userData={userData} isLoading={isLoading} />
+          <BurgerMenu
+            userData={userData}
+            isLoading={isLoading}
+            categories={categories}
+            numOfClicks={numOfClicks}
+            setNumOfClicks={setNumOfClicks}
+            setLine={setLine}
+          />
         )}
-        <Filters className="absolute -bottom-100 right-0"></Filters>
       </header>
     </div>
   );

@@ -3,9 +3,9 @@ export function Modal({ handler, purpose, isShow }) {
   return (
     <UIModal isShow={isShow}>
       {purpose === "AddWorker" ? (
-        <UIModal.AddTitle handler={handler}></UIModal.AddTitle>
+        <UIModal.AddTitle handler={handler}>Добавить работника</UIModal.AddTitle>
       ) : purpose === "AddTask" ? (
-        <UIModal.AddTask handler={handler}></UIModal.AddTask>
+        <UIModal.AddTask handler={handler}>Добавить задачу</UIModal.AddTask>
       ) : purpose === "AddCategory" ? (
         <UIModal.AddCategory handler={handler}>Категория</UIModal.AddCategory>
       ) : purpose === "AddQualify" ? (
@@ -19,7 +19,7 @@ export function Modal({ handler, purpose, isShow }) {
       ) : purpose === "GetCategories" ? (
         <UIModal.GetWork handler={handler}>Категории</UIModal.GetWork>
       ) : (
-        <></>
+        ""
       )}
     </UIModal>
   );
