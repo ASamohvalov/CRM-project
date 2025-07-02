@@ -29,6 +29,41 @@ export function Aside({ userRole = [] }) {
           Задачи
         </p>
       </Link>
+      <Link
+        href="./myTasks"
+        className="pl-1 flex relative items-center mt-5 mx-auto before:bg-white before:absolute before:bottom-[-10px] before:left-0 hover:before:animate-down-to-end hover:before:h-[2px] transition-all"
+      >
+        <TaskIcon className="min-w-10 h-10 mr-5" />
+        <p className="text-inherit truncate">
+          Заявки
+        </p>
+      </Link>
+      {userRole?.find(item=>item==="ROLE_ADMIN") || userRole?.find(item=>item==="ROLE_MANAGER") ? (
+        <Link
+          href="./accepting"
+          className="pl-1 flex relative items-center mt-5 mx-auto before:bg-white before:absolute before:bottom-[-10px] before:left-0 hover:before:animate-down-to-end hover:before:h-[2px] transition-all"
+        >
+          <AdminIcon className="min-w-10 h-10 mr-5" />
+          <p className="text-inherit truncate">
+            Принять
+          </p>
+        </Link>
+      ) : (
+        <></>
+      )}
+      {userRole?.find(item=>item==="ROLE_MANAGER") ? (
+        <Link
+          href="./course"
+          className="pl-1 flex relative items-center mt-5 mx-auto before:bg-white before:absolute before:bottom-[-10px] before:left-0 hover:before:animate-down-to-end hover:before:h-[2px] transition-all"
+        >
+          <AdminIcon className="min-w-10 h-10 mr-5" />
+          <p className="text-inherit truncate">
+            Менджер
+          </p>
+        </Link>
+      ) : (
+        <></>
+      )}
       {userRole?.find(item=>item==="ROLE_ADMIN") ? (
         <Link
           href="./admin"
@@ -42,6 +77,7 @@ export function Aside({ userRole = [] }) {
       ) : (
         <></>
       )}
+      
 
       <Link
         href="./login"

@@ -21,7 +21,7 @@ function AdminPage() {
     {
       purpose: "AddWorker",
       name: "Добавить сотрудника",
-      handler: addCategoryHandler,
+      handler: AddWorker,
     },
     { purpose: "AddTask", name: "Добавить задачу", handler: addTaskHandler },
     {
@@ -49,12 +49,18 @@ function AdminPage() {
       purpose: "GetCategories",
       name: "Узнать категории задач",
       handler: () => getHandler("/task/get/task_categories"),
-    },
+    }
   ];
 
   function addTaskHandler(e, name, description, points, deadline, categoryId) {
     e.preventDefault();
-    if (name === "" || description === "" || points === "" || deadline === "" || categoryId === "") {
+    if (
+      name === "" ||
+      description === "" ||
+      points === "" ||
+      deadline === "" ||
+      categoryId === ""
+    ) {
       return;
     }
     const accessToken = localStorage.getItem("accessToken");
@@ -70,10 +76,9 @@ function AdminPage() {
           description: description,
           numberOfPoints: Number(points),
           deadline: deadline,
-          taskCategoryId: categoryId
+          taskCategoryId: categoryId,
         }),
       });
-      console.log("s");
     } catch (e) {
       console.log(e);
     }
@@ -161,6 +166,61 @@ function AdminPage() {
       console.log(e);
     }
   }
+  
+  async function AddWorker(
+    e,
+    {
+      login,
+      email,
+      password,
+      firstName,
+      lastName,
+      patronymic,
+      qualificationId,
+      role,
+      phoneNumber,
+      passportNumber,
+      passportSeries,
+    }
+  ) {
+    e.preventDefault();
+    for (let i of Object.values(arguments[1])) {
+      if(!i) return;
+    }
+    if(role.toString().toLowerCase() === "админ"){
+      role = "ROLE_ADMIN"
+    }else if(role.toString().toLowerCase() === "менджер") {
+      role = "ROLE_MANAGER"
+    } else {
+      role = "ROLE_EMPLOYEE"
+    }
+    
+    const accessToken = localStorage.getItem("accessToken");
+    try {
+      fetch(env.BACKEND_API_URL + "/admin/add_employee", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify({
+          login: login,
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          patronymic: patronymic,
+          qualificationId: qualificationId,
+          role: role,
+          phoneNumber: phoneNumber,
+          passportNumber: passportNumber,
+          passportSeries: passportSeries,
+        }),
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <>
@@ -169,12 +229,12 @@ function AdminPage() {
       <main className="lg:pl-20 px-6 pt-32 h-[100vh]">
         <Background>
           <div
-            className={`w-[100%] h-[100%] bg-milk dark:bg-dark-coffee rounded-2xl p-10 flex flex-wrap gap-x-10 gap-y-0 justify-center`}
+            className={`w-[100%] h-[100%] bg-milk dark:bg-dark-coffee rounded-2xl p-10 flex flex-wrap gap-x-10 gap-y-0 justify-center overflow-y-scroll list`}
           >
             {buttons.map((item) => (
               <button
                 key={item.name}
-                className="bg-white dark:bg-dark-chocolate dark:border-dark-milk border-2 border-chocolate box-border rounded-2xl min-w-70 h-[30%] p-5 text-waffle dark:text-dark-milk"
+                className="bg-white mb-3 dark:bg-dark-chocolate dark:border-dark-milk border-2 border-chocolate box-border rounded-2xl min-w-70 h-[30%] p-5 text-waffle dark:text-dark-milk"
                 onClick={() =>
                   setIsShow({
                     status: true,
